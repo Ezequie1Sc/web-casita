@@ -1,0 +1,48 @@
+.whatsappButton {
+  position: relative;
+  overflow: hidden;
+}
+
+.whatsappButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.whatsappButton:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.whatsappButton i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.whatsappButton:hover i {
+  transform: scale(1.2);
+}
+
+/* Efecto de pulso para el botón de WhatsApp */
+.whatsappButton[variant="whatsapp"] {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}

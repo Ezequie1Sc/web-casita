@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  transition: all var(--transition-fast);
+}
+
+.sm {
+  font-size: 0.875rem;
+}
+
+.md {
+  font-size: 1rem;
+}
+
+.lg {
+  font-size: 1.25rem;
+}
+
+.filled {
+  color: #ffc107;
+}
+
+.empty {
+  color: #ddd;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  transform: scale(1.1);
+}

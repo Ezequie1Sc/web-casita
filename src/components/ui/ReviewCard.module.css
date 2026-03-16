@@ -1,0 +1,96 @@
+.card {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--terracota);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.userName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--texto-oscuro);
+  margin: 0;
+}
+
+.date {
+  color: var(--texto-claro);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.comment {
+  color: var(--texto-oscuro);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.likeButton {
+  color: var(--texto-claro);
+  border-color: var(--texto-claro);
+}
+
+.likeButton:hover {
+  background: var(--texto-claro);
+  color: white;
+  border-color: var(--texto-claro);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .date {
+    align-self: flex-start;
+  }
+}

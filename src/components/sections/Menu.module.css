@@ -1,0 +1,235 @@
+.menu {
+  padding: 80px 0;
+  background: #fafafa;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--texto-oscuro);
+  margin-bottom: 40px;
+  text-align: center;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--terracota);
+  opacity: 0.3;
+}
+
+/* Categorías principales */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 40px;
+  background: white;
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categoryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  color: var(--texto-claro);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.categoryButton:hover {
+  color: var(--terracota);
+  background: rgba(203, 142, 107, 0.05);
+}
+
+.categoryButton.active {
+  background: var(--terracota);
+  color: white;
+  box-shadow: 0 4px 10px rgba(203, 142, 107, 0.2);
+}
+
+.categoryButton.active .categoryIcon {
+  color: white;
+}
+
+.categoryIcon {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  transition: color 0.2s ease;
+}
+
+/* ========================================= */
+/* FILTROS SECUNDARIOS - MISMO DISEÑO */
+/* ========================================= */
+.filtersContainer {
+  margin: 30px 0 40px;
+  text-align: center;
+}
+
+.filtersLabel {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--texto-claro);
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+
+.filtersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filterButton {
+  padding: 10px 24px;
+  border: 1px solid #e5e5e5;
+  background: white;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  color: var(--texto-claro);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  min-width: 120px;
+}
+
+.filterButton:hover {
+  border-color: var(--terracota);
+  color: var(--terracota);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(203, 142, 107, 0.1);
+}
+
+.filterButton.active {
+  background: var(--terracota);
+  border-color: var(--terracota);
+  color: white;
+  box-shadow: 0 4px 12px rgba(203, 142, 107, 0.25);
+  font-weight: 500;
+}
+
+.filterDescription {
+  font-size: 0.9rem;
+  color: var(--texto-claro);
+  margin-top: 15px;
+  padding: 8px 0;
+  border-top: 1px dashed #eee;
+  display: inline-block;
+  opacity: 0.8;
+  font-style: italic;
+  max-width: 500px;
+}
+
+/* Grid de productos */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu {
+    padding: 60px 0;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  
+  .categories {
+    padding: 6px;
+    gap: 2px;
+    border-radius: 40px;
+  }
+  
+  .categoryButton {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .categoryIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .filterButton {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Scroll horizontal en móvil */
+@media (max-width: 480px) {
+  .filtersGrid {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 4px 8px 4px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  
+  .filtersGrid::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  .filtersGrid::-webkit-scrollbar-thumb {
+    background: var(--terracota);
+    border-radius: 3px;
+  }
+  
+  .filterButton {
+    flex: 0 0 auto;
+  }
+}

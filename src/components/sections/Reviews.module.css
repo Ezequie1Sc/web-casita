@@ -1,0 +1,152 @@
+.reviews {
+  padding: 80px 0;
+  background: var(--crema);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--terracota);
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: var(--miel);
+  border-radius: 2px;
+}
+
+.subtitle {
+  color: var(--texto-claro);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 20px auto 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat {
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--terracota);
+  line-height: 1.2;
+}
+
+.statLabel {
+  color: var(--texto-claro);
+  font-size: 0.875rem;
+}
+
+.statStars {
+  margin-top: 8px;
+}
+
+.addReview {
+  max-width: 500px;
+  margin: 0 auto 40px;
+}
+
+.form {
+  background: var(--blanco);
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.formTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--texto-oscuro);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formRating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--melocoton);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  margin-bottom: 20px;
+  transition: border-color var(--transition-fast);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--terracota);
+}
+
+.formButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .reviews {
+    padding: 60px 0;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form {
+    padding: 20px;
+  }
+  
+  .formButtons {
+    flex-direction: column;
+  }
+}

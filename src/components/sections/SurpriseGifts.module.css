@@ -1,0 +1,432 @@
+.surpriseSection {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #fff5f7 0%, #ffeef1 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.surpriseSection::before {
+  content: '✨🎁✨';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 4rem;
+  opacity: 0.1;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.surpriseSection::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  background: #f7d9c4;
+  opacity: 0.05;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #b45f6b;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: #f7d9c4;
+  opacity: 0.8;
+}
+
+.subtitle {
+  color: #b45f6b;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 20px auto 0;
+  opacity: 0.8;
+}
+
+/* Filtros por ocasión */
+.occasionFilters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.occasionButton {
+  padding: 8px 20px;
+  border: 1px solid #f7d9c4;
+  background: white;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  color: #b45f6b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.occasionButton:hover {
+  border-color: #cb8e6b;
+  color: #9e4e5a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(203, 142, 107, 0.15);
+}
+
+.occasionButton.active {
+  background: #f7d9c4;
+  border-color: #f7d9c4;
+  color: #4e3e2e;
+}
+
+/* Contenedor del carrusel */
+.carouselContainer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+  padding: 0 40px;
+  z-index: 2;
+}
+
+/* Flechas de navegación */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(247, 217, 196, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  border: 1px solid #f7d9c4;
+}
+
+.arrow:hover {
+  background: #f7d9c4;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 20px rgba(247, 217, 196, 0.4);
+}
+
+.arrow:hover .arrowIcon {
+  color: #4e3e2e;
+}
+
+.leftArrow {
+  left: 0;
+}
+
+.rightArrow {
+  right: 0;
+}
+
+.arrowIcon {
+  width: 22px;
+  height: 22px;
+  color: #cb8e6b;
+  transition: color 0.3s ease;
+}
+
+/* Carrusel */
+.giftsCarousel {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  padding: 15px 5px 25px 5px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.giftsCarousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.giftsCarousel::-webkit-scrollbar-track {
+  background: rgba(247, 217, 196, 0.2);
+  border-radius: 10px;
+}
+
+.giftsCarousel::-webkit-scrollbar-thumb {
+  background: #f7d9c4;
+  border-radius: 10px;
+}
+
+.giftsCarousel::-webkit-scrollbar-thumb:hover {
+  background: #cb8e6b;
+}
+
+/* Tarjeta de regalo */
+.giftCard {
+  flex: 0 0 320px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(247, 217, 196, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid rgba(247, 217, 196, 0.3);
+}
+
+.giftCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(247, 217, 196, 0.25);
+}
+
+.popularBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f7d9c4;
+  color: #4e3e2e;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 3;
+  box-shadow: 0 6px 12px rgba(247, 217, 196, 0.4);
+}
+
+.giftImageContainer {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.giftImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.giftCard:hover .giftImage {
+  transform: scale(1.1);
+}
+
+.occasionTag {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cb8e6b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.giftContent {
+  padding: 20px;
+}
+
+.giftTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #4e3e2e;
+  margin: 0 0 8px 0;
+}
+
+.giftDescription {
+  font-size: 0.9rem;
+  color: #7b5e4a;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.includesBox {
+  background: #fff9f5;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #f7d9c4;
+}
+
+.includesTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4e3e2e;
+  margin: 0 0 8px 0;
+}
+
+.includesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.includeItem {
+  font-size: 0.85rem;
+  color: #7b5e4a;
+  padding: 4px 0;
+  line-height: 1.4;
+  border-bottom: 1px dashed #f7d9c4;
+}
+
+.includeItem:last-child {
+  border-bottom: none;
+}
+
+.giftPrice {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #cb8e6b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Banner personalizado - COLOR DEL FOOTER */
+.customBanner {
+  background: #f7d9c4;  /* Mismo color del footer */
+  border-radius: 30px;
+  padding: 50px;
+  margin: 50px 0 0;
+  color: #4e3e2e;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(247, 217, 196, 0.3);
+}
+
+.customBanner::before {
+  content: '✨🎁✨';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 8rem;
+  opacity: 0.1;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  color: #cb8e6b;
+}
+
+.customContent {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.customContent h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 300;
+  color: #4e3e2e;
+}
+
+.customContent p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  opacity: 0.9;
+  color: #7b5e4a;
+}
+
+/* Botón de WhatsApp personalizado para el banner */
+.customBanner :global(.whatsapp-btn) {
+  background: #cb8e6b !important;  /* Terracota en lugar de verde */
+  border: none !important;
+  box-shadow: 0 4px 0 #b07a56 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 14px 32px !important;
+  font-size: 1.1rem !important;
+}
+
+.customBanner :global(.whatsapp-btn:hover) {
+  background: #b07a56 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #8b5e42 !important;
+}
+
+.customBanner :global(.whatsapp-btn i) {
+  color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .surpriseSection {
+    padding: 60px 0;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .occasionFilters {
+    gap: 8px;
+  }
+
+  .occasionButton {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+
+  .carouselContainer {
+    padding: 0 20px;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .giftCard {
+    flex: 0 0 280px;
+  }
+
+  .giftImageContainer {
+    height: 180px;
+  }
+
+  .giftPrice {
+    font-size: 1.3rem;
+  }
+
+  .customBanner {
+    padding: 40px 20px;
+  }
+
+  .customContent h3 {
+    font-size: 1.6rem;
+  }
+
+  .customContent p {
+    font-size: 1rem;
+  }
+
+  .customBanner :global(.whatsapp-btn) {
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+  }
+}
