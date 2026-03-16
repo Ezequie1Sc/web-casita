@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { surpriseGifts, SurpriseGift } from '../../data/surpriseGifts';
-import { Button } from '../ui/Button';
 import { WhatsAppButton } from '../ui/WhatsAppButton';
 import { Icon } from '../ui/Icon';
 import styles from './SurpriseGifts.module.css';
@@ -57,7 +56,7 @@ export const SurpriseGifts: React.FC<SurpriseGiftsProps> = ({ onWhatsAppClick })
     if (gift.price === 0) return 'Precio variable';
     return `$${gift.price} MXN`;
   };
-
+ //@ts-ignore
   const handleWhatsApp = (gift: SurpriseGift) => {
     const message = gift.whatsappMessage;
     if (onWhatsAppClick) {

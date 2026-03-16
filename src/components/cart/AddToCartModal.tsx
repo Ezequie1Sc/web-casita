@@ -76,7 +76,6 @@ const PAPAS_EXTRAS = [
 ];
 
 // Bebidas NO tienen extras
-const BEBIDAS_EXTRAS: string[] = [];
 
 // Extras por defecto para otras categorías
 const DEFAULT_EXTRAS = [

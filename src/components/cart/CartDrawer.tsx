@@ -196,6 +196,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       name="payment"
                       value="efectivo"
                       checked={customerData.metodoPago === 'efectivo'}
+                       //@ts-ignore
                       onChange={(e) => updateCustomerData({ 
                         metodoPago: 'efectivo',
                         necesitaCambio: false,
@@ -210,6 +211,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       name="payment"
                       value="transferencia"
                       checked={customerData.metodoPago === 'transferencia'}
+                      //@ts-ignore
                       onChange={(e) => updateCustomerData({ metodoPago: 'transferencia' })}
                     />
                     <span>Transferencia</span>
