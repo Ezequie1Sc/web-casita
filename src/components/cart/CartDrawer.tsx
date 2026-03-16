@@ -196,12 +196,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       name="payment"
                       value="efectivo"
                       checked={customerData.metodoPago === 'efectivo'}
-                       //@ts-ignore
-                      onChange={(e) => updateCustomerData({ 
-                        metodoPago: 'efectivo',
-                        necesitaCambio: false,
-                        pagoCon: undefined 
-                      })}
+                      
+                     onChange={() =>
+  updateCustomerData({
+    metodoPago: 'efectivo',
+    necesitaCambio: false,
+    pagoCon: undefined
+  })
+}
                     />
                     <span>Efectivo</span>
                   </label>

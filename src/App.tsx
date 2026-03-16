@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import { Navbar, Footer } from './components/common';
 import { Hero, Menu, Promotions, SurpriseGifts, Reviews } from './components/sections';
 import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/cart/CartDrawer';
 import { useReviews } from './hooks/useReviews';
+import { useState } from 'react';
 
 function App() {
   const { reviews, addReview, likeReview } = useReviews();
