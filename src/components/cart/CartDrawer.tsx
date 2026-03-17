@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import { Button } from '../ui/Button';
 import styles from './CartDrawer.module.css';
@@ -36,11 +36,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     items.forEach((item) => {
       message += `${item.quantity}x ${item.name}\n`;
       
-      if (item.selectedOptions && item.selectedOptions.length > 0) {
+      if (item.selectedOptions?.length) {
         message += `  Untables: ${item.selectedOptions.join(', ')}\n`;
       }
       
-      if (item.selectedExtras && item.selectedExtras.length > 0) {
+      if (item.selectedExtras?.length) {
         message += `  Frutas extra: ${item.selectedExtras.join(', ')}\n`;
       }
       
@@ -57,6 +57,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     
     if (customerData.metodoPago === 'efectivo') {
       message += `Método de pago: Efectivo\n`;
+
       if (customerData.necesitaCambio && customerData.pagoCon) {
         const cambio = customerData.pagoCon - subtotal;
         message += `Paga con: $${customerData.pagoCon}\n`;
@@ -82,13 +83,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
   const handleWhatsAppClick = () => {
     const message = generateWhatsAppMessage();
-    const phoneNumber = '521234567890'; // Número de La Casita
+    const phoneNumber = '521234567890';
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-    
-    // Opcional: limpiar carrito después de enviar
-    // clearCart();
-    // onClose();
   };
 
   if (!isOpen) return null;
@@ -96,6 +93,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
+      
       <div className={styles.drawer}>
         <div className={styles.header}>
           <h2 className={styles.title}>Tu Pedido</h2>
@@ -114,7 +112,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             </div>
           ) : (
             <>
-              {/* Lista de productos */}
+              {/* ITEMS */}
               <div className={styles.itemsList}>
                 {items.map((item) => (
                   <div key={item.id} className={styles.cartItem}>
@@ -122,41 +120,50 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       <h4 className={styles.itemName}>{item.name}</h4>
                       <p className={styles.itemQuantity}>Cantidad: {item.quantity}</p>
                       <p className={styles.itemPrice}>${item.price} c/u</p>
-                      {item.selectedOptions && item.selectedOptions.length > 0 && (
-                        <p className={styles.itemDetails}>
-                          Untables: {item.selectedOptions.join(', ')}
-                        </p>
-                      )}
-                      {item.selectedExtras && item.selectedExtras.length > 0 && (
-                        <p className={styles.itemDetails}>
-                          Frutas: {item.selectedExtras.join(', ')}
-                        </p>
-                      )}
+
+                     {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0 && (
+  <p className={styles.itemDetails}>
+    Untables: {item.selectedOptions.join(', ')}
+  </p>
+)}
+
+{Array.isArray(item.selectedExtras) && item.selectedExtras.length > 0 && (
+  <p className={styles.itemDetails}>
+    Frutas: {item.selectedExtras.join(', ')}
+  </p>
+)}
+
                       {item.observations && (
-                        <p className={styles.itemNote}>Nota: {item.observations}</p>
+                        <p className={styles.itemNote}>
+                          Nota: {item.observations}
+                        </p>
                       )}
                     </div>
-                    
+
                     <div className={styles.itemActions}>
                       <div className={styles.quantityControls}>
-                        <button 
+                        <button
                           className={styles.quantityButton}
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         >
                           -
                         </button>
-                        <span className={styles.quantityValue}>{item.quantity}</span>
-                        <button 
+
+                        <span className={styles.quantityValue}>
+                          {item.quantity}
+                        </span>
+
+                        <button
                           className={styles.quantityButton}
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         >
                           +
                         </button>
                       </div>
-                      <button 
+
+                      <button
                         className={styles.removeButton}
                         onClick={() => removeItem(item.id)}
-                        title="Eliminar"
                       >
                         ×
                       </button>
@@ -165,56 +172,60 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 ))}
               </div>
 
-              {/* Datos del cliente */}
+              {/* DATOS */}
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>Tus datos</h3>
+
                 <div className={styles.formRow}>
                   <input
                     type="text"
                     placeholder="Nombre"
                     value={customerData.nombre}
-                    onChange={(e) => updateCustomerData({ nombre: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      updateCustomerData({ nombre: e.target.value })
+                    }
                     className={styles.input}
                   />
+
                   <input
                     type="text"
                     placeholder="Apellido"
                     value={customerData.apellido}
-                    onChange={(e) => updateCustomerData({ apellido: e.target.value })}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      updateCustomerData({ apellido: e.target.value })
+                    }
                     className={styles.input}
                   />
                 </div>
               </div>
 
-              {/* Método de pago */}
+              {/* PAGO */}
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>Método de pago</h3>
+
                 <div className={styles.paymentOptions}>
                   <label className={styles.radioLabel}>
                     <input
                       type="radio"
-                      name="payment"
-                      value="efectivo"
                       checked={customerData.metodoPago === 'efectivo'}
-                      
-                     onChange={() =>
-  updateCustomerData({
-    metodoPago: 'efectivo',
-    necesitaCambio: false,
-    pagoCon: undefined
-  })
-}
+                      onChange={() =>
+                        updateCustomerData({
+                          metodoPago: 'efectivo',
+                          necesitaCambio: false,
+                          pagoCon: undefined
+                        })
+                      }
                     />
                     <span>Efectivo</span>
                   </label>
+
                   <label className={styles.radioLabel}>
                     <input
                       type="radio"
-                      name="payment"
-                      value="transferencia"
                       checked={customerData.metodoPago === 'transferencia'}
-                      //@ts-ignore
-                      onChange={(e) => updateCustomerData({ metodoPago: 'transferencia' })}
+                      onChange={() =>
+                        updateCustomerData({ metodoPago: 'transferencia' })
+                      }
                     />
                     <span>Transferencia</span>
                   </label>
@@ -226,21 +237,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       <input
                         type="checkbox"
                         checked={customerData.necesitaCambio}
-                        onChange={(e) => updateCustomerData({ 
-                          necesitaCambio: e.target.checked,
-                          pagoCon: e.target.checked ? customerData.pagoCon : undefined
-                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          updateCustomerData({
+                            necesitaCambio: e.target.checked,
+                            pagoCon: e.target.checked
+                              ? customerData.pagoCon
+                              : undefined
+                          })
+                        }
                       />
                       <span>¿Necesitas cambio?</span>
                     </label>
+
                     {customerData.necesitaCambio && (
                       <input
                         type="number"
                         placeholder="¿Con cuánto pagas?"
                         value={customerData.pagoCon || ''}
-                        onChange={(e) => updateCustomerData({ 
-                          pagoCon: parseFloat(e.target.value) 
-                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          updateCustomerData({
+                            pagoCon: Number(e.target.value)
+                          })
+                        }
                         className={styles.input}
                       />
                     )}
@@ -248,54 +266,59 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 )}
 
                 {customerData.metodoPago === 'transferencia' && (
-                  <button 
-                    className={styles.showBankButton}
-                    onClick={() => setShowPaymentDetails(!showPaymentDetails)}
-                  >
-                    {showPaymentDetails ? 'Ocultar datos bancarios' : 'Ver datos bancarios'}
-                  </button>
-                )}
+                  <>
+                    <button
+                      className={styles.showBankButton}
+                      onClick={() =>
+                        setShowPaymentDetails(!showPaymentDetails)
+                      }
+                    >
+                      {showPaymentDetails
+                        ? 'Ocultar datos bancarios'
+                        : 'Ver datos bancarios'}
+                    </button>
 
-                {showPaymentDetails && customerData.metodoPago === 'transferencia' && (
-                  <div className={styles.bankDetails}>
-                    <p>Banco: {bankDetails.bank}</p>
-                    <p>Cuenta: {bankDetails.account}</p>
-                    <p>CLABE: {bankDetails.clabe}</p>
-                    <p>Titular: {bankDetails.name}</p>
-                    <p className={styles.note}>
-                      Importante: Enviar comprobante por WhatsApp
-                    </p>
-                  </div>
+                    {showPaymentDetails && (
+                      <div className={styles.bankDetails}>
+                        <p>Banco: {bankDetails.bank}</p>
+                        <p>Cuenta: {bankDetails.account}</p>
+                        <p>CLABE: {bankDetails.clabe}</p>
+                        <p>Titular: {bankDetails.name}</p>
+                        <p className={styles.note}>
+                          Enviar comprobante por WhatsApp
+                        </p>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
 
-              {/* Resumen */}
+              {/* TOTAL */}
               <div className={styles.summary}>
                 <div className={styles.summaryRow}>
                   <span>Subtotal:</span>
                   <span>${subtotal}</span>
                 </div>
+
                 <div className={styles.summaryRow}>
                   <span>Envío:</span>
                   <span>Gratis</span>
                 </div>
+
                 <div className={styles.totalRow}>
                   <span>TOTAL:</span>
                   <span>${subtotal}</span>
                 </div>
               </div>
 
-              {/* Botones de acción */}
+              {/* BOTONES */}
               <div className={styles.actions}>
-                <Button 
-                  variant="outline" 
-                  onClick={clearCart}
-                  fullWidth
-                >
+                <Button variant="outline" onClick={clearCart} fullWidth>
                   Vaciar carrito
                 </Button>
-                <Button 
-                  variant="whatsapp" 
+
+                <Button
+                  variant="whatsapp"
                   onClick={handleWhatsAppClick}
                   fullWidth
                   disabled={!customerData.nombre || !customerData.apellido}

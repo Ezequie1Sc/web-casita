@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './Button';
 import styles from './ToastNotification.module.css';
 
@@ -24,7 +24,7 @@ export const ToastNotification: React.FC<ToastNotificationProps> = ({
   const [isLeaving, setIsLeaving] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     
     if (isVisible && autoClose) {
       timer = setTimeout(() => {
