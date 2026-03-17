@@ -2,6 +2,12 @@ import type { MenuCategory } from '../types/menu';
 
 export const menuData: MenuCategory[] = [
   {
+    id: 'todos',
+    name: 'Todos',
+    icon: 'menu',
+    items: [] // Se llenará dinámicamente
+  },
+  {
     id: 'chilaquiles',
     name: 'Chilaquiles',
     icon: 'fire',
@@ -19,11 +25,28 @@ export const menuData: MenuCategory[] = [
     ]
   },
   {
+    id: 'enchiladas',
+    name: 'Enchiladas Rojas',
+    icon: 'fire',
+    items: [
+      {
+        id: 'enchiladas-pollo',
+        name: 'Enchiladas Rojas de Pollo',
+        description: '3 enchiladas bañadas en salsa roja, rellenas de pollo, con crema, queso y cebolla',
+        price: { regular: 75 },
+        image: '/src/assets/menu/enchilidas.jpg',
+        category: 'Enchiladas',
+        extras: ['Huevo estrellado +$10', 'Crema extra +$5', 'Queso extra +$5'],
+        isPopular: true
+      },
+    ]
+  },
+ 
+  {
     id: 'hotcakes',
     name: 'Hot Cakes',
     icon: 'layers',
     items: [
-      // Hot Cakes Normales (3 piezas)
       {
         id: 'hotcakes-sencillo',
         name: 'Sencillo (3 piezas)',
@@ -33,13 +56,12 @@ export const menuData: MenuCategory[] = [
         category: 'Hot Cakes Normales',
         options: ['Lechera', 'Miel', 'Dulce de Leche', 'Mermelada', 'Hershey\'s', 'Nutella']
       },
-
       {
         id: 'hotcakes-fruta',
         name: 'Con Fruta (3 piezas)',
         description: '3 hot cakes con 1 untable y manzana o plátano',
         price: { regular: 65 },
-        image: '/src/assets/menu/hotcakes-platano.jpg',
+        image: '/src/assets/menu/hotcake-manza.jpg',
         category: 'Hot Cakes Normales'
       },
       {
@@ -59,9 +81,6 @@ export const menuData: MenuCategory[] = [
         image: '/src/assets/menu/hotcakes.jpg',
         category: 'Hot Cakes Normales'
       },
-   
-      
-      // Hot Cakes Minis
       {
         id: 'minis-10',
         name: 'Minis 10 piezas',
@@ -69,8 +88,7 @@ export const menuData: MenuCategory[] = [
         price: { regular: 35 },
         image: '/src/assets/menu/mini-fresa.jpg',
         category: 'Hot Cakes Minis'
-      },
-    
+      }
     ]
   },
   {
@@ -86,7 +104,6 @@ export const menuData: MenuCategory[] = [
         image: '/src/assets/menu/sanwich-clasico.jpg',
         category: 'Sándwiches'
       },
-     
       {
         id: 'sandwich-especial',
         name: 'Especial',
@@ -103,10 +120,25 @@ export const menuData: MenuCategory[] = [
         price: { regular: 75 },
         image: '/src/assets/menu/club-con-papas.jpg',
         category: 'Sándwiches'
+      },
+      {
+        id: 'cuernito-papas',
+        name: 'Cuernito con Papas',
+        description: 'Jamón, queso, salchicha, huevo estrellado, pollo, vegetales y una orden de papas',
+        price: { regular: 75 },
+        image: '/src/assets/menu/cuernito-papas.jpg',
+        category: 'Sándwiches'
+      },
+      {
+        id: 'cuernito',
+        name: 'Cuernito',
+        description: 'Jamón, queso, salchicha, huevo estrellado, pollo, vegetales',
+        price: { regular: 55 },
+        image: '/src/assets/menu/cuernito.jpg',
+        category: 'Sándwiches'
       }
     ]
   },
-
   {
     id: 'hotdogs',
     name: 'Hot Dogs',
@@ -117,14 +149,27 @@ export const menuData: MenuCategory[] = [
         name: 'Hot Dog',
         description: 'Orden de 2 piezas con salchicha, tomate, cebolla frita, tocino, jalapeño y romantía',
         price: { regular: 60 },
-               image: '/src/assets/menu/hotdog-papas.jpg',
-
+        image: '/src/assets/menu/hotdog-papas.jpg',
         category: 'Hot Dogs',
         options: ['Con papas']
       }
     ]
   },
-  
+  {
+    id: 'hamburguesas',
+    name: 'Hamburguesas',
+    icon: 'circle-stack-3x',
+    items: [
+      {
+        id: 'hamburguesa-papas',
+        name: 'Hamburguesa con Papas',
+        description: 'Hamburguesa con carne casera, lechuga, tomate, cebolla frita, jamón, queso, tocino, jalapeño y papas',
+        price: { regular: 75 },
+        image: '/src/assets/menu/hamburguesa.jpg',
+        category: 'Hamburguesas'
+      }
+    ]
+  },
   {
     id: 'burritas',
     name: 'Burritas',
@@ -140,23 +185,6 @@ export const menuData: MenuCategory[] = [
       }
     ]
   },
-
-   {
-    id: 'hamburguesas',
-    name: 'Hamburguesa con papas',
-    icon: 'chevron-right',
-    items: [
-      {
-        id: 'Hamburguesa con papas',
-        name: 'Hamburguesa con papas',
-        description: 'Orden de 3 piezas con jamón, queso, romantía y salsas',
-        price: { regular: 50 },
-        image: '/src/assets/menu/hamburguesa.jpg',
-        category: 'hamburguesas'
-      }
-    ]
-  },
-
   {
     id: 'papas',
     name: 'Papas',
@@ -177,7 +205,6 @@ export const menuData: MenuCategory[] = [
     name: 'Bebidas',
     icon: 'beaker',
     items: [
-     
       {
         id: 'coca-600',
         name: 'Coca-Cola 600 ml',
@@ -199,13 +226,11 @@ export const menuData: MenuCategory[] = [
         image: '/src/assets/menu/jumex.webp',
         category: 'Embotellados'
       },
-      
-      // Luciados
       {
         id: 'chocomilk',
         name: 'Licuado de Chocomilk',
         price: { regular: 40 },
-        image: '/src/assets/menu/licuadoChoco.jpg',
+        image: '/src/assets/menu/licuado-chocomilk.jpg',
         category: 'Licuados'
       },
       {
@@ -231,19 +256,33 @@ export const menuData: MenuCategory[] = [
         isPopular: true
       },
       {
-        id: 'fresa-luciado',
+        id: 'fresa-licuado',
         name: 'Licuado de Fresa',
         price: { regular: 45 },
         image: '/src/assets/menu/licuado-frutos.jpg',
-        category: 'Licuado'
+        category: 'Licuados'
       },
       {
         id: 'avena',
         name: 'Licuado de Avena',
         price: { regular: 25 },
-         image: '/src/assets/menu/licuado-frutos.jpg',
+        image: '/src/assets/menu/licuado-frutos.jpg',
         category: 'Licuados'
       }
     ]
   }
 ];
+
+// Función para obtener todos los items (para la categoría "Todos")
+export const getAllMenuItems = () => {
+  const allItems: any[] = [];
+  menuData.forEach(category => {
+    if (category.id !== 'todos') {
+      allItems.push(...category.items);
+    }
+  });
+  return allItems;
+};
+
+// Llenar la categoría "Todos" con todos los items
+menuData[0].items = getAllMenuItems();

@@ -1,78 +1,61 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { surpriseGifts, SurpriseGift } from '../../data/surpriseGifts';
+import React, { useState } from 'react';
 import { WhatsAppButton } from '../ui/WhatsAppButton';
-import { Icon } from '../ui/Icon';
 import styles from './SurpriseGifts.module.css';
 
-interface SurpriseGiftsProps {
-  onWhatsAppClick?: (message: string) => void;
-}
+// Datos de ejemplo para la galería de desayunos sorpresa
+const surpriseGallery = [
+  {
+    id: 1,
+    image: '/src/assets/sorpresa/sorpresa-cumple.jpg',
+    alt: 'Desayuno completo con club sandwich, waffles, fruta y flores',
+    category: 'Cumpleaños'
+  },
+  {
+    id: 2,
+    image: '/src/assets/sorpresa/sor2.jpg',
+    alt: 'Desayuno de cumpleaños con flores y globo',
+    category: 'Cumpleaños'
+  },
+  {
+    id: 3,
+    image: '/src/assets/sorpresa/cumpleaños.jpg',
+    alt: 'Paquete personalizado',
+    category: 'Cumpleaños'
+  },
+  {
+    id: 4,
+    image: '/src/assets/sorpresa/cumple.jpg',
+    alt: 'Desayuno sorpresa con hot cakes, club sandwich, fruta y golosinas',
+    category: 'Sorpresa'
+  },
+  {
+    id: 5,
+    image: '/src/assets/sorpresa/desayuno-romantico.jpg',
+    alt: 'Desayuno sorpresa con hot cakes, club sandwich, fruta y golosinas',
+    category: 'Sorpresa'
+  },
+  {
+    id: 6,
+    image: '/src/assets/sorpresa/cua.jpg',
+    alt: 'Desayuno completo con hot cakes, club sandwich, fruta y golosinas',
+    category: 'Cumpleaños'
+  }
+];
 
-export const SurpriseGifts: React.FC<SurpriseGiftsProps> = ({ onWhatsAppClick }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [selectedOccasion, setSelectedOccasion] = useState<string>('todos');
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+export const SurpriseGifts: React.FC = () => {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  // Obtener ocasiones únicas para los filtros
-  const occasions = ['todos', ...new Set(surpriseGifts.map(gift => gift.occasion))];
-  
-  // Filtrar por ocasión
-  const filteredGifts = selectedOccasion === 'todos' 
-    ? surpriseGifts 
-    : surpriseGifts.filter(gift => gift.occasion === selectedOccasion);
-
-  const checkScrollButtons = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
-    }
+  const openModal = (id: number) => {
+    setSelectedImage(id);
   };
 
-  useEffect(() => {
-    checkScrollButtons();
-    window.addEventListener('resize', checkScrollButtons);
-    return () => window.removeEventListener('resize', checkScrollButtons);
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 400;
-      const newScrollLeft = direction === 'left' 
-        ? scrollContainerRef.current.scrollLeft - scrollAmount 
-        : scrollContainerRef.current.scrollLeft + scrollAmount;
-      
-      scrollContainerRef.current.scrollTo({
-        left: newScrollLeft,
-        behavior: 'smooth'
-      });
-      
-      setTimeout(checkScrollButtons, 300);
-    }
+  const closeModal = () => {
+    setSelectedImage(null);
   };
 
-  const formatPrice = (gift: SurpriseGift) => {
-    if (gift.price === 0) return 'Precio variable';
-    return `$${gift.price} MXN`;
-  };
- //@ts-ignore
-  const handleWhatsApp = (gift: SurpriseGift) => {
-    const message = gift.whatsappMessage;
-    if (onWhatsAppClick) {
-      onWhatsAppClick(message);
-    } else {
-      const phoneNumber = '521234567890';
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-    }
-  };
-
-  // Obtener etiqueta de ocasión en español
-  const getOccasionLabel = (occasion: string) => {
-    const gift = surpriseGifts.find(g => g.occasion === occasion);
-    return gift?.occasionLabel || occasion;
-  };
+  const selectedItem = selectedImage !== null 
+    ? surpriseGallery.find(item => item.id === selectedImage) 
+    : null;
 
   return (
     <section id="sorpresas" className={styles.surpriseSection}>
@@ -80,105 +63,94 @@ export const SurpriseGifts: React.FC<SurpriseGiftsProps> = ({ onWhatsAppClick })
         <div className={styles.header}>
           <h2 className={styles.title}>Desayunos Sorpresa</h2>
           <p className={styles.subtitle}>
-            Para ocasiones especiales: cumpleaños, aniversarios, San Valentín y más
+            Creamos momentos inolvidables para esas personas especiales
           </p>
         </div>
 
-        {/* Filtros por ocasión */}
-        <div className={styles.occasionFilters}>
-          {occasions.map((occasion) => (
-            <button
-              key={occasion}
-              className={`${styles.occasionButton} ${selectedOccasion === occasion ? styles.active : ''}`}
-              onClick={() => setSelectedOccasion(occasion)}
+        {/* Galería de imágenes */}
+        <div className={styles.galleryGrid}>
+          {surpriseGallery.map((item) => (
+            <div 
+              key={item.id} 
+              className={styles.galleryItem}
+              onClick={() => openModal(item.id)}
             >
-              {occasion === 'todos' ? 'Todos' : getOccasionLabel(occasion)}
-            </button>
+              <div className={styles.imageWrapper}>
+                <img 
+                  src={item.image} 
+                  alt={item.alt}
+                  className={styles.galleryImage}
+                  loading="lazy"
+                />
+                <div className={styles.imageOverlay}>
+                  <span className={styles.categoryTag}>{item.category}</span>
+                  <span className={styles.viewIcon}>🔍</span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Carrusel de regalos sorpresa */}
-        <div className={styles.carouselContainer}>
-          {showLeftArrow && (
-            <button 
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              onClick={() => scroll('left')}
-              aria-label="Ver anteriores"
-            >
-              <Icon name="chevron-left" className={styles.arrowIcon} />
-            </button>
-          )}
-
-          {showRightArrow && (
-            <button 
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              onClick={() => scroll('right')}
-              aria-label="Ver más"
-            >
-              <Icon name="chevron-right" className={styles.arrowIcon} />
-            </button>
-          )}
-
-          <div 
-            className={styles.giftsCarousel}
-            ref={scrollContainerRef}
-            onScroll={checkScrollButtons}
-          >
-            {filteredGifts.map((gift) => (
-              <div key={gift.id} className={styles.giftCard}>
-                {gift.isPopular && (
-                  <span className={styles.popularBadge}>Más popular</span>
-                )}
-                
-                <div className={styles.giftImageContainer}>
-                  <img src={gift.image} alt={gift.title} className={styles.giftImage} />
-                  <span className={styles.occasionTag}>{gift.occasionLabel}</span>
-                </div>
-
-                <div className={styles.giftContent}>
-                  <h3 className={styles.giftTitle}>{gift.title}</h3>
-                  <p className={styles.giftDescription}>{gift.description}</p>
-
-                  <div className={styles.includesBox}>
-                    <p className={styles.includesTitle}>Incluye:</p>
-                    <ul className={styles.includesList}>
-                      {gift.includes.slice(0, 4).map((item, index) => (
-                        <li key={index} className={styles.includeItem}>• {item}</li>
-                      ))}
-                      {gift.includes.length > 4 && (
-                        <li className={styles.includeItem}>+ {gift.includes.length - 4} más...</li>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div className={styles.giftPrice}>
-                    {formatPrice(gift)}
-                  </div>
-
-                  <WhatsAppButton
-                    message={gift.whatsappMessage}
-                    size="sm"
-                    fullWidth
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Banner de personalización */}
-        <div className={styles.customBanner}>
+        {/* Sección de contacto personalizado */}
+        <div className={styles.customOrderSection}>
           <div className={styles.customContent}>
-            <h3>✨ ¿Tienes una ocasión especial?</h3>
-            <p>Podemos personalizar un desayuno sorpresa exactamente como lo imaginas</p>
-            <WhatsAppButton
-              message="Hola, quiero personalizar un desayuno sorpresa para una ocasión especial"
-              variant="primary"
-              size="lg"
-            />
+            <h3 className={styles.customTitle}>
+              ¿Te gustaría sorprender a una persona especial?
+            </h3>
+            <p className={styles.customDescription}>
+              Creamos desayunos personalizados para cualquier ocasión: 
+              cumpleaños, aniversarios, San Valentín, o simplemente para 
+              hacer feliz a alguien. Tú imaginas la idea, nosotros la hacemos realidad.
+            </p>
+            
+            <div className={styles.featuresList}>
+              <div className={styles.featureItem}>
+                <span className={styles.featureNumber}>01</span>
+                <span>Diseño personalizado</span>
+              </div>
+              <div className={styles.featureItem}>
+                <span className={styles.featureNumber}>02</span>
+                <span>Mensaje incluido</span>
+              </div>
+              <div className={styles.featureItem}>
+                <span className={styles.featureNumber}>03</span>
+                <span>Entrega a domicilio</span>
+              </div>
+              <div className={styles.featureItem}>
+                <span className={styles.featureNumber}>04</span>
+                <span>Hora específica</span>
+              </div>
+            </div>
+
+            <div className={styles.contactActions}>
+              <WhatsAppButton
+                message="Hola, me gustaría encargar un desayuno sorpresa personalizado. ¿Podemos hablar sobre las opciones?"
+                variant="primary"
+                size="lg"
+                className={styles.contactButton}
+              />
+              <p className={styles.contactNote}>
+                Haz clic para contactarnos y crearemos el desayuno perfecto para esa persona especial
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Modal para ver imagen ampliada */}
+      {selectedItem && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeModal}>×</button>
+            <img 
+              src={selectedItem.image} 
+              alt={selectedItem.alt}
+              className={styles.modalImage}
+            />
+            <p className={styles.modalCaption}>{selectedItem.alt}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

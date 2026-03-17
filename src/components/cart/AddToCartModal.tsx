@@ -138,7 +138,7 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     }
     else if (item.id === 'hotcakes-fruta') {
       if (selectedFruit === 'manzana') {
-        setCurrentImage('/src/assets/menu/hotcakes.jpg');
+        setCurrentImage('/src/assets/menu/hotcake-manza.jpg');
       } else if (selectedFruit === 'platano') {
         setCurrentImage('/src/assets/menu/hotcakes-platano.jpg');
       } else {

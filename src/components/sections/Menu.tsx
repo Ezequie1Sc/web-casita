@@ -9,7 +9,7 @@ import { useCart } from '../../context/CartContext';
 import styles from './Menu.module.css';
 
 export const Menu: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(menuData[0].id);
+  const [selectedCategory, setSelectedCategory] = useState<string>(menuData[1].id); // Empezar con chilaquiles (índice 1)
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('todos');
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -28,6 +28,7 @@ export const Menu: React.FC = () => {
   // Configuración para filtros de bebidas
   const drinkFilterConfig = [
     { id: 'todos', label: 'Todos', description: 'Todas nuestras bebidas disponibles' },
+    { id: 'Naturales', label: 'Naturales', description: 'Bebidas frescas preparadas al momento con ingredientes naturales' },
     { id: 'Embotellados', label: 'Embotellados', description: 'Bebidas embotelladas de las mejores marcas' },
     { id: 'Licuados', label: 'Licuados', description: 'Licuados cremosos preparados con fruta natural' }
   ];
@@ -39,10 +40,17 @@ export const Menu: React.FC = () => {
     { id: 'Hot Cakes Minis', label: 'Hot Cakes Minis', description: 'Hot cakes pequeños en porciones de 10 a 30 piezas' }
   ];
 
+  // Configuración para filtros de waffles
+  const wafflesFilterConfig = [
+    { id: 'todos', label: 'Todos', description: 'Todos nuestros waffles' },
+    { id: 'Waffles', label: 'Waffles', description: 'Waffles esponjosos con diferentes toppings' }
+  ];
+
   // Obtener los filtros según la categoría seleccionada
   const getFilterConfig = () => {
     if (selectedCategory === 'bebidas') return drinkFilterConfig;
-    if (selectedCategory === 'hotcakes') return hotcakesFilterConfig;
+    if (selectedCategory === 'hotcakes' || selectedCategory === 'hotcakes-minis') return hotcakesFilterConfig;
+    if (selectedCategory === 'waffles') return wafflesFilterConfig;
     return [];
   };
 
@@ -68,12 +76,13 @@ export const Menu: React.FC = () => {
     size: string,
     selectedExtras: string[], 
     observations: string,
-    selectedProtein?: string // ← AÑADIR ESTE PARÁMETRO OPCIONAL
+    selectedProtein?: string,
+    selectedFruit?: string,
   ) => {
     // Calcular precio base según categoría y tamaño
     let basePrice = 0;
     
-    if (item.category === 'Chilaquiles') {
+    if (item.category === 'Chilaquiles' || item.category === 'Enchiladas') {
       basePrice = size === 'mediana' ? 60 : 80;
     } else {
       basePrice = item.price.regular || item.price.medium || 0;
@@ -83,6 +92,7 @@ export const Menu: React.FC = () => {
     const extrasCost = selectedExtras.reduce((total, extra) => {
       if (extra.includes('$5')) return total + 5;
       if (extra.includes('$10')) return total + 10;
+      if (extra.includes('$15')) return total + 15;
       return total;
     }, 0);
     
@@ -92,11 +102,15 @@ export const Menu: React.FC = () => {
     
     // Crear nombre del producto con detalles
     let productName = item.name;
-    if (item.category === 'Chilaquiles') {
+    if (item.category === 'Chilaquiles' || item.category === 'Enchiladas') {
       productName = `${item.name} (${size === 'mediana' ? 'Media' : 'Orden'})`;
       if (hasHuevo) {
         productName += ' con huevo';
       }
+    }
+    
+    if (selectedFruit && (item.category === 'Waffles' || item.category.includes('Hot Cakes'))) {
+      productName = `${item.name} con ${selectedFruit}`;
     }
     
     addItem({
@@ -129,7 +143,6 @@ export const Menu: React.FC = () => {
   };
 
   const handleViewCart = () => {
-    // Abrir el carrito
     const cartButton = document.querySelector('[aria-label="Carrito de compras"]');
     if (cartButton) {
       (cartButton as HTMLButtonElement).click();
@@ -146,7 +159,7 @@ export const Menu: React.FC = () => {
       <div className="container">
         <h2 className={styles.title}>Menú</h2>
         
-        {/* Categorías principales */}
+        {/* Categorías principales - INCLUYE "TODOS" */}
         <div className={styles.categories}>
           {categories.map((category) => (
             <button
@@ -167,7 +180,9 @@ export const Menu: React.FC = () => {
         {hasFilters && (
           <div className={styles.filtersContainer}>
             <div className={styles.filtersLabel}>
-              — {selectedCategory === 'bebidas' ? 'BEBIDAS' : 'HOT CAKES'} —
+              — {selectedCategory === 'bebidas' ? 'BEBIDAS' : 
+                 selectedCategory === 'hotcakes' ? 'HOT CAKES' :
+                 selectedCategory === 'waffles' ? 'WAFFLES' : ''} —
             </div>
             
             <div className={styles.filtersGrid}>
