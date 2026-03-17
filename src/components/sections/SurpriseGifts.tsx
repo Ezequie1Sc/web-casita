@@ -105,19 +105,39 @@ export const SurpriseGifts: React.FC = () => {
             
             <div className={styles.featuresList}>
               <div className={styles.featureItem}>
-                <span className={styles.featureNumber}>01</span>
+                <div className={styles.featureIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3V20M12 3L8 7M12 3L16 7M5 12H19M5 12C5 12 3 14 3 17C3 20 5 20 5 20H19C19 20 21 20 21 17C21 14 19 12 19 12M5 12C5 12 7 10 12 10C17 10 19 12 19 12" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
                 <span>Diseño personalizado</span>
               </div>
+
               <div className={styles.featureItem}>
-                <span className={styles.featureNumber}>02</span>
+                <div className={styles.featureIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 20H20M4 20C4 20 4 16 8 16H16C20 16 20 20 20 20M4 20V8C4 5.8 5.5 4 8 4H16C18.5 4 20 5.8 20 8V20M8 10H16M8 14H12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
                 <span>Mensaje incluido</span>
               </div>
+
               <div className={styles.featureItem}>
-                <span className={styles.featureNumber}>03</span>
+                <div className={styles.featureIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 8H19M5 8C3.9 8 3 7.1 3 6C3 4.9 3.9 4 5 4H19C20.1 4 21 4.9 21 6C21 7.1 20.1 8 19 8M5 8V18C5 19.1 5.9 20 7 20H17C18.1 20 19 19.1 19 18V8M9 12H15M12 12V16M12 16L14 14M12 16L10 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
                 <span>Entrega a domicilio</span>
               </div>
+
               <div className={styles.featureItem}>
-                <span className={styles.featureNumber}>04</span>
+                <div className={styles.featureIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.5"/>
+                    <path d="M12 7V12L15 15" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
                 <span>Hora específica</span>
               </div>
             </div>

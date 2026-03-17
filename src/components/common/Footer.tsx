@@ -5,9 +5,8 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: 'fab fa-whatsapp', url: '#' },
-    { icon: 'fab fa-instagram', url: '#' },
-    { icon: 'fab fa-facebook-f', url: '#' }
+    { icon: 'fab fa-whatsapp', url: '' },
+    { icon: 'fab fa-facebook-f', url: 'https://www.facebook.com/profile.php?id=61573747828139' }
   ];
 
   return (
@@ -26,8 +25,8 @@ export const Footer: React.FC = () => {
 
           <div className={styles.column}>
             <h4 className={styles.subtitle}>Horario</h4>
-            <p className={styles.text}>Lunes a Domingo</p>
-            <p className={`${styles.text} ${styles.bold}`}>8:00 am - 2:00 pm</p>
+            <p className={styles.text}>Martes a Domingo</p>
+            <p className={`${styles.text} ${styles.bold}`}>8:00 am - 12:00 pm</p>
           </div>
 
           <div className={styles.column}>

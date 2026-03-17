@@ -209,21 +209,21 @@ export const menuData: MenuCategory[] = [
         id: 'coca-600',
         name: 'Coca-Cola 600 ml',
         price: { regular: 25 },
-        image: '/src/assets/menu/coca.webp',
+        image: '/src/assets/menu/coca.png',
         category: 'Embotellados'
       },
       {
         id: 'sabor-600',
         name: 'Refresco de Sabor 600 ml',
         price: { regular: 25 },
-        image: '/src/assets/menu/sabor.webp',
+        image: '/src/assets/menu/sabor.png',
         category: 'Embotellados'
       },
       {
         id: 'jumex',
         name: 'Jugo Jumex Cajita',
         price: { regular: 15 },
-        image: '/src/assets/menu/jumex.webp',
+        image: '/src/assets/menu/jumex.png',
         category: 'Embotellados'
       },
       {
@@ -237,21 +237,21 @@ export const menuData: MenuCategory[] = [
         id: 'platano-licuado',
         name: 'Licuado de Plátano',
         price: { regular: 40 },
-        image: '/src/assets/menu/licuado-avena.jpg',
+        image: '/src/assets/menu/licuado-avena.png',
         category: 'Licuados'
       },
       {
         id: 'manzana-licuado',
         name: 'Licuado de Manzana',
-        price: { regular: 25 },
-        image: '/src/assets/bebidas.jpg',
+        price: { regular: 40 },
+        image: '/src/assets/menu/licuado-avena.png',
         category: 'Licuados'
       },
       {
         id: 'frutos-rojos',
         name: 'Licuado de Frutos Rojos',
         price: { regular: 40 },
-        image: '/src/assets/menu/licuado-frutos.jpg',
+        image: '/src/assets/menu/frutos-rojos.png',
         category: 'Licuados',
         isPopular: true
       },
@@ -265,8 +265,8 @@ export const menuData: MenuCategory[] = [
       {
         id: 'avena',
         name: 'Licuado de Avena',
-        price: { regular: 25 },
-        image: '/src/assets/menu/licuado-frutos.jpg',
+        price: { regular: 45 },
+        image: '/src/assets/menu/licuado-avena.png',
         category: 'Licuados'
       }
     ]

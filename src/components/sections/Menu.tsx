@@ -9,7 +9,7 @@ import { useCart } from '../../context/CartContext';
 import styles from './Menu.module.css';
 
 export const Menu: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(menuData[1].id); // Empezar con chilaquiles (índice 1)
+  const [selectedCategory, setSelectedCategory] = useState<string>(menuData[0].id); // Empezar con chilaquiles (índice 1)
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('todos');
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);

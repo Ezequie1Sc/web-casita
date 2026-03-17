@@ -1,12 +1,10 @@
 import { Navbar, Footer } from './components/common';
-import { Hero, Menu, Promotions, SurpriseGifts, Reviews } from './components/sections';
+import { Hero, Menu, Promotions, SurpriseGifts } from './components/sections';
 import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/cart/CartDrawer';
-import { useReviews } from './hooks/useReviews';
 import { useState } from 'react';
 
 function App() {
-  const { reviews, addReview, likeReview } = useReviews();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleNavigate = (section: string) => {
@@ -32,12 +30,6 @@ function App() {
       <Menu />
       <Promotions onWhatsAppClick={handleWhatsApp} />
       <SurpriseGifts />
-      <Reviews 
-        reviews={reviews}
-        onAddReview={addReview}
-        onLike={likeReview}
-        currentUserId="user123"
-      />
       <Footer />
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </CartProvider>

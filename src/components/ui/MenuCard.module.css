@@ -1,14 +1,19 @@
 .card {
-  background: white;
+  background: #FFF6F2;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px rgba(244, 166, 181, 0.15);
   transition: all 0.3s ease;
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(230, 126, 34, 0.1);
+  border: 1px solid #FADCD9;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(244, 166, 181, 0.25);
 }
 
 /* Badge */
@@ -29,47 +34,48 @@
   letter-spacing: 0.3px;
 }
 
+/* Badges adaptados a tu marca */
 .popularBadge {
-  background: linear-gradient(135deg, #ff6b6b, #ff4757);
+  background: linear-gradient(135deg, #F4A6B5, #E58A9E);
   color: white;
 }
 
 .newBadge {
-  background: linear-gradient(135deg, #51cf66, #37b24d);
-  color: white;
+  background: linear-gradient(135deg, #FFD6E0, #F4A6B5);
+  color: #8B5E3C;
 }
 
 .miniBadge {
-  background: linear-gradient(135deg, #ffd43b, #f59f00);
-  color: white;
+  background: linear-gradient(135deg, #FFF0F5, #FADCD9);
+  color: #8B5E3C;
 }
 
 /* ========================= */
-/* CONTENEDOR DE IMAGEN FIX */
+/* CONTENEDOR DE IMAGEN */
 /* ========================= */
 
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3; /* mantiene proporción limpia */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+  background: linear-gradient(145deg, #FFF6F2, #FADCD9);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
 }
 
-/* Imagen corregida */
-
 .image {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* evita recortes */
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
-/* Overlay */
+.card:hover .image {
+  transform: scale(1.05);
+}
 
 .imageOverlay {
   position: absolute;
@@ -77,7 +83,7 @@
   left: 0;
   right: 0;
   height: 30%;
-  background: linear-gradient(to top, rgba(0,0,0,0.03), transparent);
+  background: linear-gradient(to top, rgba(244,166,181,0.1), transparent);
   pointer-events: none;
 }
 
@@ -91,7 +97,7 @@
   flex-direction: column;
   gap: 8px;
   flex: 1;
-  background: white;
+  background: #FFF6F2;
 }
 
 /* Título */
@@ -105,12 +111,12 @@
 .titleIcon {
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, #fff5e6, #ffe4cc);
+  background: linear-gradient(135deg, #FFE4EC, #FADCD9);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e67e22;
+  color: #E58A9E;
   font-size: 0.8rem;
   font-weight: 600;
   flex-shrink: 0;
@@ -119,13 +125,12 @@
 .name {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #2d3436;
+  color: #8B5E3C;
   margin: 0;
   line-height: 1.3;
   flex: 1;
   letter-spacing: -0.2px;
   display: -webkit-box;
-  
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -135,7 +140,7 @@
 
 .description {
   font-size: 0.75rem;
-  color: #636e72;
+  color: #6D6D6D;
   margin: 0;
   line-height: 1.4;
   display: -webkit-box;
@@ -154,8 +159,8 @@
 }
 
 .pieceBadge {
-  background: #f1f3f5;
-  color: #495057;
+  background: #FFE4EC;
+  color: #8B5E3C;
   font-size: 0.6rem;
   font-weight: 600;
   padding: 3px 8px;
@@ -163,7 +168,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #F4A6B5;
 }
 
 /* Precio */
@@ -174,32 +179,32 @@
   justify-content: space-between;
   margin: 4px 0;
   padding: 6px 0;
-  border-top: 1px dashed #e9ecef;
-  border-bottom: 1px dashed #e9ecef;
+  border-top: 1px dashed #FADCD9;
+  border-bottom: 1px dashed #FADCD9;
 }
 
 .priceLabel {
   font-size: 0.7rem;
-  color: #868e96;
+  color: #A1887F;
   text-transform: uppercase;
 }
 
 .price {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #e67e22;
+  color: #E58A9E;
 }
 
 .price small {
   font-size: 0.7rem;
   font-weight: 500;
-  color: #adb5bd;
+  color: #BCAAA4;
 }
 
 /* Botón */
 
 .addButton {
-  background: linear-gradient(135deg, #e67e22, #d35400) !important;
+  background: linear-gradient(135deg, #F4A6B5, #E58A9E) !important;
   color: white !important;
   border: none !important;
   border-radius: 40px !important;
@@ -208,7 +213,12 @@
   font-weight: 600 !important;
   transition: all 0.3s ease !important;
   margin-top: 6px !important;
-  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(229, 138, 158, 0.3) !important;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(229, 138, 158, 0.4) !important;
 }
 
 /* ========================= */
@@ -216,7 +226,6 @@
 /* ========================= */
 
 @media (max-width: 600px) {
-
   .grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -230,11 +239,9 @@
   .price {
     font-size: 1.1rem;
   }
-
 }
 
 @media (min-width: 768px) {
-
   .imageContainer {
     aspect-ratio: 16 / 10;
   }
@@ -246,11 +253,9 @@
   .price {
     font-size: 1.3rem;
   }
-
 }
 
 @media (min-width: 1024px) {
-
   .imageContainer {
     aspect-ratio: 16 / 9;
   }
@@ -262,5 +267,4 @@
   .price {
     font-size: 1.4rem;
   }
-
 }
