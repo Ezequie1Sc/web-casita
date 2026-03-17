@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <div className={styles.imageContainer}>
           <div className={styles.imageWrapper}>
             <img 
-              src="/src/assets/logo.jpg" 
+              src="./logo2.png" 
               alt="La Casita"
               className={styles.image}
             />
