@@ -31,7 +31,7 @@ const SPREAD_OPTIONS = [
 const MINIS_FRUIT_OPTIONS = [
   { id: 'manzana', name: 'Manzana', price: 0, image: '/src/assets/menu/hotcakes-minis-manzana.jpg' },
   { id: 'platano', name: 'Plátano', price: 0, image: '/src/assets/menu/hotcakes-minis-platano.jpg' },
-  { id: 'fresa', name: 'Fresa', price: 0, image: '/src/assets/menu/hotcakes-minis-fresa.jpg' }
+  { id: 'fresa', name: 'Fresa', price: 0, image: './menu/hotcakes-minis-fresa.jpg' }
 ];
 
 const MINIS_SIZE_OPTIONS = [
@@ -118,37 +118,37 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     if (!item) return;
 
     if (item.category === 'Chilaquiles' && selectedProtein) {
-      setCurrentImage('/src/assets/menu/chilaquileshuevi.jpg');
+      setCurrentImage('./menu/chilaquileshuevi.jpg');
     } 
     else if (item.category === 'Hot Cakes Minis') {
       if (selectedFruit === 'manzana') {
-        setCurrentImage('/src/assets/menu/mini-manzana.jpg');
+        setCurrentImage('./menu/mini-manzana.jpg');
       } else if (selectedFruit === 'platano') {
-        setCurrentImage('/src/assets/menu/mini-platano.png');
+        setCurrentImage('./menu/mini-platano.png');
       } else if (selectedFruit === 'fresa') {
-        setCurrentImage('/src/assets/menu/mini-fresa.jpg');
+        setCurrentImage('./menu/mini-fresa.jpg');
       } else {
         setCurrentImage(item.image);
       }
     }
     else if (item.id === 'hotcakes-fruta') {
       if (selectedFruit === 'manzana') {
-        setCurrentImage('/src/assets/menu/hotcake-manza.jpg');
+        setCurrentImage('./menu/hotcake-manza.jpg');
       } else if (selectedFruit === 'platano') {
-        setCurrentImage('/src/assets/menu/hotcakes-platano.jpg');
+        setCurrentImage('./menu/hotcakes-platano.jpg');
       } else {
         setCurrentImage(item.image);
       }
     } 
     else if (item.id === 'hotcakes-fresa-chocolate') {
-      setCurrentImage('/src/assets/menu/hotcakes-fresa.jpg');
+      setCurrentImage('./menu/hotcakes-fresa.jpg');
     } 
     else if (item.id === 'hotcakes-philadelphia') {
-      setCurrentImage('/src/assets/menu/hotcakes.jpg');
+      setCurrentImage('./menu/hotcakes.jpg');
     }
     else if (item.category === 'Hamburguesas') {
       if (selectedBurgerOption === 'con-papas') {
-        setCurrentImage('/src/assets/menu/hamburguesa-papas.jpg');
+        setCurrentImage('./menu/hamburguesa-papas.jpg');
       } else {
         setCurrentImage(item.image);
       }

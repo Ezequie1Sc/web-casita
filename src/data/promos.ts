@@ -15,7 +15,7 @@ export const promos: Promo[] = [
     id: 'promo-cuernito-licuado',
     title: 'Cuernito Especial + Licuado',
     description: 'Cuernito de jamón, queso, huevo estrellado, tocino y salchicha + Licuado de Chocomilk',
-    image: '/src/assets/promo/promo1.png',
+    image: './promo/promo1.png',
     originalPrice: 95,
     promoPrice: 75,
     includes: [
@@ -35,7 +35,7 @@ export const promos: Promo[] = [
     id: 'promo-hotcakes-licuado',
     title: 'Hot Cakes + Licuado',
     description: '3 Hot Cakes con fruta (plátano o manzana) + Licuado de Chocomilk o plátano',
-    image: '/src/assets/promo/promo2.png',
+    image: './promo/promo2.png',
     originalPrice: 110,
     promoPrice: 95,
     includes: [
