@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onCartClick }) => {
     { label: 'Inicio', section: 'hero' },
     { label: 'Menú', section: 'menu' },
     { label: 'Sorpresas', section: 'sorpresas' },
-    { label: 'Reseñas', section: 'reviews' }
+    { label: 'Promociones', section: 'promociones' }
   ];
 
   const handleNavigate = (section: string) => {
@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onCartClick }) => {
           onClick={() => handleNavigate('hero')}
         >
           <img 
-            src="/src/assets/logo2.png" 
+            src="./logo2.png" 
             alt="La Casita"
             className={styles.logoImage}
           />

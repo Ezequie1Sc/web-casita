@@ -6,37 +6,37 @@ import styles from './SurpriseGifts.module.css';
 const surpriseGallery = [
   {
     id: 1,
-    image: '/src/assets/sorpresa/sorpresa-cumple.jpg',
+    image: '<div className=""></div>/sorpresa/sorpresa-cumple.jpg',
     alt: 'Desayuno completo con club sandwich, waffles, fruta y flores',
     category: 'Cumpleaños'
   },
   {
     id: 2,
-    image: '/src/assets/sorpresa/sor2.jpg',
+    image: './sorpresa/sor2.jpg',
     alt: 'Desayuno de cumpleaños con flores y globo',
     category: 'Cumpleaños'
   },
   {
     id: 3,
-    image: '/src/assets/sorpresa/cumpleaños.jpg',
+    image: './sorpresa/cumpleaños.jpg',
     alt: 'Paquete personalizado',
     category: 'Cumpleaños'
   },
   {
     id: 4,
-    image: '/src/assets/sorpresa/cumple.jpg',
+    image: './sorpresa/cumple.jpg',
     alt: 'Desayuno sorpresa con hot cakes, club sandwich, fruta y golosinas',
     category: 'Sorpresa'
   },
   {
     id: 5,
-    image: '/src/assets/sorpresa/desayuno-romantico.jpg',
+    image: './sorpresa/desayuno-romantico.jpg',
     alt: 'Desayuno sorpresa con hot cakes, club sandwich, fruta y golosinas',
     category: 'Sorpresa'
   },
   {
     id: 6,
-    image: '/src/assets/sorpresa/cua.jpg',
+    image: './sorpresa/cua.jpg',
     alt: 'Desayuno completo con hot cakes, club sandwich, fruta y golosinas',
     category: 'Cumpleaños'
   }

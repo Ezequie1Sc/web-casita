@@ -17,7 +17,7 @@ function App() {
   const handleWhatsApp = (message: string) => {
     if (!message.trim()) return;
 
-    const phoneNumber = '521234567890';
+    const phoneNumber = '529961136244';
     const encodedMessage = encodeURIComponent(message);
 
     window.open(
