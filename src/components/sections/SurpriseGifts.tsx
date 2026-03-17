@@ -6,7 +6,7 @@ import styles from './SurpriseGifts.module.css';
 const surpriseGallery = [
   {
     id: 1,
-    image: '<div className=""></div>/sorpresa/sorpresa-cumple.jpg',
+    image: './sorpresa/sorpresa-cumple.jpg',
     alt: 'Desayuno completo con club sandwich, waffles, fruta y flores',
     category: 'Cumpleaños'
   },
