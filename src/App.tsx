@@ -5,17 +5,17 @@ import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/cart/CartDrawer';
 
 function App() {
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const handleNavigate = (section: string): void => {
+  const handleNavigate = (section: string) => {
     const element = document.getElementById(section);
     if (!element) return;
 
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleWhatsApp = (message: string): void => {
-    if (!message) return;
+  const handleWhatsApp = (message: string) => {
+    if (!message.trim()) return;
 
     const phoneNumber = '521234567890';
     const encodedMessage = encodeURIComponent(message);

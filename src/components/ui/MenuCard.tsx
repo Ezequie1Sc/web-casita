@@ -1,4 +1,3 @@
-import React from 'react';
 import type { MenuItem } from '../../types/menu';
 import { Button } from './Button';
 import styles from './MenuCard.module.css';
@@ -31,7 +30,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item, onAddToCart }) => {
   };
 
   const isHotCake = id.includes('hotcakes') || category.includes('Hot Cakes');
-  const isMini = id.includes('minis') || category.includes('Minis');
+  const isMini   = id.includes('minis')    || category.includes('Minis');
   const isLicuado = category.includes('Licuados') || category.includes('Luciados');
 
   // Obtener inicial para el icono
@@ -39,7 +38,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item, onAddToCart }) => {
     if (isHotCake) return '';
     if (isLicuado) return '';
     if (category.includes('Chilaquiles')) return '';
-    if (category.includes('Sándwich')) return '';
+    if (category.includes('Sándwich'))    return '';
     if (category.includes('Hamburguesa')) return '';
     return '🍽️';
   };
@@ -49,8 +48,10 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item, onAddToCart }) => {
       {/* Badges */}
       <div className={styles.badgeContainer}>
         {isPopular && <span className={`${styles.badge} ${styles.popularBadge}`}>Popular</span>}
-        {isNew && <span className={`${styles.badge} ${styles.newBadge}`}>Nuevo</span>}
-        {isMini && !isPopular && !isNew && <span className={`${styles.badge} ${styles.miniBadge}`}>Mini</span>}
+        {isNew     && <span className={`${styles.badge} ${styles.newBadge}`}>Nuevo</span>}
+        {isMini && !isPopular && !isNew && (
+          <span className={`${styles.badge} ${styles.miniBadge}`}>Mini</span>
+        )}
       </div>
       
       {/* Imagen */}
@@ -94,7 +95,9 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item, onAddToCart }) => {
         {/* Precio */}
         <div className={styles.priceSection}>
           <span className={styles.priceLabel}>Precio</span>
-          <span className={styles.price}>{formatPrice()} <small>MXN</small></span>
+          <span className={styles.price}>
+            {formatPrice()} <small>MXN</small>
+          </span>
         </div>
         
         {/* Botón */}
