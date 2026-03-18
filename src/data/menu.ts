@@ -46,7 +46,7 @@ const baseMenuData: MenuCategory[] = [
         name: 'Sencillo (3 piezas)',
         description: '3 hot cakes con 1 untable',
         price: { regular: 50 },
-        image: './menu/hotcakes.jpg',
+        image: './menu/hotcakes-tres.jpg',
         category: 'Hot Cakes Normales',
         options: ['Lechera', 'Miel', 'Dulce de Leche', 'Mermelada', "Hershey's", 'Nutella'],
       },
@@ -72,7 +72,7 @@ const baseMenuData: MenuCategory[] = [
         name: 'Glaseado Philadelphia (3 piezas)',
         description: '3 hot cakes con 2 frutas y 2 untables',
         price: { regular: 90 },
-        image: './menu/hotcakes.jpg',
+        image: './menu/glaseado-hotcakes.jpg',
         category: 'Hot Cakes Normales',
       },
       {

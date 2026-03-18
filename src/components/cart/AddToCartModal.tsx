@@ -147,8 +147,10 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
       setCurrentImage('./menu/hotcakes.jpg');
     }
     else if (item.category === 'Hamburguesas') {
-      if (selectedBurgerOption === 'con-papas') {
-        setCurrentImage('./menu/hamburguesa-papas.jpg');
+      if (selectedBurgerOption === 'clasica') {
+        setCurrentImage('./menu/hamburguesa-a.png'); // Imagen para hamburguesa clásica
+      } else if (selectedBurgerOption === 'con-papas') {
+        setCurrentImage('./menu/hamPapas.jpg'); // Imagen para hamburguesa con papas
       } else {
         setCurrentImage(item.image);
       }

@@ -15,7 +15,8 @@ export type IconName =
   | 'shopping-cart'
   | 'x-mark'
   | 'plus'
-  | 'minus';
+  | 'minus'
+  | 'magnifying-glass';  // ← Agregamos el nuevo icono
 
 interface IconProps {
   name: IconName;
@@ -36,6 +37,7 @@ const iconMap: Record<IconName, any> = {
   'shopping-cart': SolidIcons.ShoppingCartIcon,
   'x-mark': SolidIcons.XMarkIcon,
   'plus': SolidIcons.PlusIcon,
+  'magnifying-glass': SolidIcons.MagnifyingGlassIcon,  // ← Agregamos el icono sólido
 };
 
 const outlineIconMap: Record<IconName, any> = {
@@ -51,6 +53,7 @@ const outlineIconMap: Record<IconName, any> = {
   'shopping-cart': OutlineIcons.ShoppingCartIcon,
   'x-mark': OutlineIcons.XMarkIcon,
   'plus': OutlineIcons.PlusIcon,
+  'magnifying-glass': OutlineIcons.MagnifyingGlassIcon,  // ← Agregamos el icono outline
 };
 
 export const Icon: React.FC<IconProps> = ({ name, className = 'w-5 h-5', outline = false }) => {

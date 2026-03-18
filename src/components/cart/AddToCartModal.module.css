@@ -212,6 +212,80 @@
   }
 }
 
+/* Opciones de hamburguesa */
+.burgerOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.burgerButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px;
+  border: 2px solid #eee;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.burgerButton:hover {
+  border-color: var(--terracota);
+  background: #fff9f5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(203, 142, 107, 0.1);
+}
+
+.burgerButton.active {
+  border-color: var(--terracota);
+  background: linear-gradient(145deg, #fff9f5 0%, #fff0e8 100%);
+  box-shadow: 0 6px 18px rgba(203, 142, 107, 0.15);
+}
+
+.burgerButton.active::before {
+  content: '✓';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  background: var(--terracota);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+.burgerName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  margin-bottom: 6px;
+}
+
+.burgerDescription {
+  font-size: 0.9rem;
+  color: var(--texto-claro);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.burgerPrice {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--terracota);
+  align-self: flex-end;
+}
+
 /* Secciones generales */
 .section {
   margin-bottom: 24px;
@@ -752,6 +826,22 @@
     margin-bottom: 16px;
   }
   
+  .burgerButton {
+    padding: 14px;
+  }
+  
+  .burgerName {
+    font-size: 1rem;
+  }
+  
+  .burgerDescription {
+    font-size: 0.8rem;
+  }
+  
+  .burgerPrice {
+    font-size: 1.1rem;
+  }
+  
   .spreadOptions,
   .fruitOptions,
   .sizeOptions,
@@ -815,6 +905,7 @@
 .modal::-webkit-scrollbar-thumb:hover {
   background: #b07a56;
 }
+
 /* Opciones de tamaño para Hot Cakes Minis */
 .minisSizeOptions {
   display: grid;

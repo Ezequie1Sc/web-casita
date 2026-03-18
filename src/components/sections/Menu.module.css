@@ -1,6 +1,6 @@
 .menu {
   padding: 80px 0;
-  background: #fafafa;
+  background: #fff9fa; /* Rosa muy bajito de fondo */
 }
 
 .title {
@@ -21,24 +21,25 @@
   transform: translateX(-50%);
   width: 60px;
   height: 2px;
-  background: var(--terracota);
-  opacity: 0.3;
+  background: #f9a8d4; /* Rosa suave */
+  opacity: 0.5;
 }
 
-/* Categorías principales */
+/* Categorías principales - con rosa bajito */
 .categories {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 4px;
   margin-bottom: 40px;
-  background: white;
+  background: #ffffff;
   padding: 8px;
   border-radius: 50px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 12px rgba(249, 168, 212, 0.15); /* Sombra rosa */
   max-width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid rgba(249, 168, 212, 0.2); /* Borde rosa muy sutil */
 }
 
 .categoryButton {
@@ -50,21 +51,21 @@
   background: transparent;
   border-radius: 40px;
   font-size: 0.95rem;
-  color: var(--texto-claro);
+  color: #5a5a5a;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .categoryButton:hover {
-  color: var(--terracota);
-  background: rgba(203, 142, 107, 0.05);
+  color: #f472b6; /* Rosa más intenso al hover */
+  background: rgba(249, 168, 212, 0.08); /* Fondo rosa muy suave */
 }
 
 .categoryButton.active {
-  background: var(--terracota);
+  background: #f9a8d4; /* Rosa suave */
   color: white;
-  box-shadow: 0 4px 10px rgba(203, 142, 107, 0.2);
+  box-shadow: 0 4px 12px rgba(249, 168, 212, 0.3);
 }
 
 .categoryButton.active .categoryIcon {
@@ -79,20 +80,23 @@
 }
 
 /* ========================================= */
-/* FILTROS SECUNDARIOS - MISMO DISEÑO */
+/* FILTROS SECUNDARIOS - CON ROSA BAJITO */
 /* ========================================= */
 .filtersContainer {
   margin: 30px 0 40px;
   text-align: center;
+  background: rgba(249, 168, 212, 0.03); /* Fondo rosa muy sutil */
+  padding: 20px;
+  border-radius: 40px;
 }
 
 .filtersLabel {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--texto-claro);
+  color: #f472b6; /* Rosa medio */
   margin-bottom: 15px;
-  opacity: 0.7;
+  font-weight: 500;
 }
 
 .filtersGrid {
@@ -105,42 +109,44 @@
 
 .filterButton {
   padding: 10px 24px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #ffe4f0; /* Borde rosa muy clarito */
   background: white;
   border-radius: 40px;
   font-size: 0.95rem;
-  color: var(--texto-claro);
+  color: #5a5a5a;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(249, 168, 212, 0.05);
   min-width: 120px;
 }
 
 .filterButton:hover {
-  border-color: var(--terracota);
-  color: var(--terracota);
+  border-color: #f9a8d4; /* Rosa suave */
+  color: #f472b6; /* Rosa medio */
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(203, 142, 107, 0.1);
+  box-shadow: 0 6px 12px rgba(249, 168, 212, 0.15);
+  background: #fff5fa; /* Fondo rosa extra suave */
 }
 
 .filterButton.active {
-  background: var(--terracota);
-  border-color: var(--terracota);
+  background: #f9a8d4; /* Rosa suave */
+  border-color: #f9a8d4;
   color: white;
-  box-shadow: 0 4px 12px rgba(203, 142, 107, 0.25);
+  box-shadow: 0 6px 16px rgba(249, 168, 212, 0.3);
   font-weight: 500;
 }
 
 .filterDescription {
   font-size: 0.9rem;
-  color: var(--texto-claro);
+  color: #f472b6; /* Rosa medio */
   margin-top: 15px;
-  padding: 8px 0;
-  border-top: 1px dashed #eee;
+  padding: 8px 20px;
+  border-top: 1px dashed #ffd9e8; /* Rosa clarito */
   display: inline-block;
-  opacity: 0.8;
-  font-style: italic;
   max-width: 500px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  font-style: normal;
 }
 
 /* Grid de productos */
@@ -161,6 +167,112 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Barra de búsqueda con rosa */
+.searchBar {
+  margin: 30px auto;
+  max-width: 500px;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 15px 20px 15px 50px;
+  border: 2px solid #ffe4f0;
+  border-radius: 60px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 4px 12px rgba(249, 168, 212, 0.1);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #f9a8d4;
+  box-shadow: 0 8px 20px rgba(249, 168, 212, 0.2);
+  transform: translateY(-2px);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #f9a8d4;
+  opacity: 0.8;
+}
+
+.searchClear {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #f9a8d4;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.searchClear:hover {
+  background: rgba(249, 168, 212, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.clearIcon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+}
+
+/* Estado vacío */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(249, 168, 212, 0.1);
+  grid-column: 1 / -1;
+  border: 1px solid #ffe4f0;
+}
+
+.emptyStateIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  opacity: 0.7;
+  filter: drop-shadow(0 4px 8px rgba(249, 168, 212, 0.2));
+}
+
+.emptyStateText {
+  font-size: 1.1rem;
+  color: #5a5a5a;
+  margin-bottom: 20px;
+}
+
+.emptyStateButton {
+  padding: 12px 30px;
+  background: #f9a8d4;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(249, 168, 212, 0.3);
+}
+
+.emptyStateButton:hover {
+  background: #f472b6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 168, 212, 0.4);
 }
 
 /* Responsive */
@@ -190,6 +302,10 @@
     height: 16px;
   }
   
+  .filtersContainer {
+    padding: 15px;
+  }
+  
   .filterButton {
     padding: 8px 18px;
     font-size: 0.9rem;
@@ -199,6 +315,14 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+  
+  .searchBar {
+    margin: 20px 15px;
+  }
+  
+  .searchInput {
+    padding: 12px 15px 12px 45px;
   }
 }
 
@@ -214,22 +338,43 @@
   .filtersGrid {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 0 4px 8px 4px;
+    padding: 0 4px 12px 4px;
     justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    gap: 8px;
   }
   
   .filtersGrid::-webkit-scrollbar {
-    height: 3px;
+    height: 4px;
+  }
+  
+  .filtersGrid::-webkit-scrollbar-track {
+    background: #ffe4f0;
+    border-radius: 4px;
   }
   
   .filtersGrid::-webkit-scrollbar-thumb {
-    background: var(--terracota);
-    border-radius: 3px;
+    background: #f9a8d4;
+    border-radius: 4px;
+  }
+  
+  .filtersGrid::-webkit-scrollbar-thumb:hover {
+    background: #f472b6;
   }
   
   .filterButton {
+    flex: 0 0 auto;
+  }
+  
+  .categories {
+    overflow-x: auto;
+    max-width: 100%;
+    justify-content: flex-start;
+    padding: 6px;
+  }
+  
+  .categoryButton {
     flex: 0 0 auto;
   }
 }
