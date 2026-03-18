@@ -118,7 +118,7 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     if (!item) return;
 
     if (item.category === 'Chilaquiles' && selectedProtein) {
-      setCurrentImage('./menu/chilaquileshuevi.jpg');
+      setCurrentImage('./menu/chilaquilesHuevi.jpg');
     } 
     else if (item.category === 'Hot Cakes Minis') {
       if (selectedFruit === 'manzana') {
@@ -463,7 +463,7 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                   </button>
                 </div>
                 {selectedProtein === 'huevo' && (
-                  <p className={styles.note}>✓ Huevo agregado - La imagen se actualizó</p>
+                  <p className={styles.note}>Huevo agregado</p>
                 )}
               </div>
             </>

@@ -23,10 +23,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             <span className={styles.highlight}>La Casita</span>
           </h1>
           <p className={styles.subtitle}>
-            Desayunos y Masa · Hechos con amor
+            Desayunos y Mas · Hechos con amor
           </p>
           <p className={styles.description}>
-            Disfruta de los mejores desayunos, hot cakes, sándwiches y más.
+            Disfruta de los mejores desayunos,
             Todo preparado al momento con ingredientes frescos y de calidad.
           </p>
           <div className={styles.buttons}>

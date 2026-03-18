@@ -18,7 +18,7 @@ export interface CartState {
 
 export interface CustomerData {
   nombre: string;
-  apellido: string;
+  direccion: string;  // Cambiamos 'apellido' por 'direccion'
   metodoPago: 'efectivo' | 'transferencia';
   necesitaCambio: boolean;
   pagoCon?: number;

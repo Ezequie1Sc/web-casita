@@ -20,63 +20,75 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   } = useCart();
 
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const bankDetails = {
     bank: 'BBVA',
-    account: '1234 5678 9012 3456',
-    clabe: '012345678901234567',
+    cardNumber: '1234 5678 9012 3456',
     name: 'La Casita Desayunos'
   };
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const generateWhatsAppMessage = () => {
-    let message = `*NUEVO PEDIDO - LA CASITA*\n\n`;
-    message += `Cliente: ${customerData.nombre} ${customerData.apellido}\n\n`;
-    message += `----------------------------------------\n\n`;
-    
-    items.forEach((item) => {
-      message += `${item.quantity}x ${item.name}\n`;
+    // Usar caracteres simples en lugar de emojis complejos
+    const itemsList = items.map(item => {
+      let itemText = `🍽 *${item.quantity}x ${item.name}*`;
       
       if (item.selectedOptions?.length) {
-        message += `  Untables: ${item.selectedOptions.join(', ')}\n`;
+        itemText += `\n   🧈 Untables: ${item.selectedOptions.join(', ')}`;
       }
       
       if (item.selectedExtras?.length) {
-        message += `  Frutas extra: ${item.selectedExtras.join(', ')}\n`;
+        itemText += `\n   🍓 Frutas extra: ${item.selectedExtras.join(', ')}`;
       }
       
       if (item.observations) {
-        message += `  Nota: ${item.observations}\n`;
+        itemText += `\n   📝 Nota: ${item.observations}`;
       }
       
-      const itemTotal = item.price * item.quantity;
-      message += `  Subtotal: $${itemTotal}\n\n`;
-    });
-    
-    message += `----------------------------------------\n`;
-    message += `SUBTOTAL: $${subtotal}\n`;
+      itemText += `\n   💰 Subtotal: $${item.price * item.quantity}`;
+      return itemText;
+    }).join('\n\n');
+
+    // Construir mensaje con emojis básicos que WhatsApp soporta bien
+    let message = `*NUEVO PEDIDO - LA CASITA*\n\n`;
+    message += `👤 *Cliente:* ${customerData.nombre}\n`;
+    message += `📍 *Dirección:* ${customerData.direccion || 'No especificada'}\n\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `📋 *DETALLE DEL PEDIDO:*\n\n`;
+    message += itemsList;
+    message += `\n\n━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `💰 *SUBTOTAL: $${subtotal}*\n`;
+    message += `🚚 *Envío: Gratis*\n`;
+    message += `💵 *TOTAL: $${subtotal}*\n\n`;
     
     if (customerData.metodoPago === 'efectivo') {
-      message += `Método de pago: Efectivo\n`;
+      message += `💵 *Método de pago:* Efectivo\n`;
 
       if (customerData.necesitaCambio && customerData.pagoCon) {
         const cambio = customerData.pagoCon - subtotal;
-        message += `Paga con: $${customerData.pagoCon}\n`;
-        message += `Cambio: $${cambio}\n`;
+        message += `   💵 Paga con: $${customerData.pagoCon}\n`;
+        message += `   💰 Cambio: $${cambio}\n`;
       }
     } else {
-      message += `Método de pago: Transferencia\n\n`;
-      message += `DATOS BANCARIOS:\n`;
-      message += `Banco: ${bankDetails.bank}\n`;
-      message += `Cuenta: ${bankDetails.account}\n`;
-      message += `CLABE: ${bankDetails.clabe}\n`;
-      message += `Titular: ${bankDetails.name}\n\n`;
-      message += `IMPORTANTE: Enviar comprobante de pago por este chat\n`;
+      message += `💳 *Método de pago:* Transferencia\n\n`;
+      message += `🏦 *DATOS BANCARIOS:*\n`;
+      message += `   Banco: ${bankDetails.bank}\n`;
+      message += `   💳 Número: ${bankDetails.cardNumber}\n`;
+      message += `   👤 Titular: ${bankDetails.name}\n\n`;
+      message += `📸 *IMPORTANTE:* Enviar comprobante de pago por este chat\n`;
     }
     
-    message += `\n----------------------------------------\n`;
-    message += `LA CASITA - Desayunos y Masa\n`;
-    message += `Tiempo de preparación: 15-20 minutos\n`;
-    message += `Gracias por tu pedido!`;
+    message += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `⏰ *Tiempo de preparación:* 15-20 minutos\n`;
+    message += `🙏 ¡Gracias por tu pedido!\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `🏠 *La Casita Desayunos* 🏠`;
     
     return message;
   };
@@ -84,7 +96,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const handleWhatsAppClick = () => {
     const message = generateWhatsAppMessage();
     const phoneNumber = '529961136244';
+    
+    // Codificar el mensaje correctamente
     const encodedMessage = encodeURIComponent(message);
+    
+    // Abrir WhatsApp
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
   };
 
@@ -96,7 +112,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
       
       <div className={styles.drawer}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Tu Pedido</h2>
+          <h2 className={styles.title}>🍽️ Tu Pedido</h2>
           <button className={styles.closeButton} onClick={onClose}>
             ×
           </button>
@@ -105,37 +121,37 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
         <div className={styles.content}>
           {items.length === 0 ? (
             <div className={styles.emptyCart}>
-              <p>Tu carrito está vacío</p>
+              <p>🛒 Tu carrito está vacío</p>
               <Button variant="primary" onClick={onClose}>
                 Ver Menú
               </Button>
             </div>
           ) : (
             <>
-              {/* ITEMS */}
+              {/* ITEMS DEL CARRITO */}
               <div className={styles.itemsList}>
                 {items.map((item) => (
                   <div key={item.id} className={styles.cartItem}>
                     <div className={styles.itemInfo}>
                       <h4 className={styles.itemName}>{item.name}</h4>
-                      <p className={styles.itemQuantity}>Cantidad: {item.quantity}</p>
-                      <p className={styles.itemPrice}>${item.price} c/u</p>
+                      <p className={styles.itemQuantity}>📦 Cantidad: {item.quantity}</p>
+                      <p className={styles.itemPrice}>💰 ${item.price} c/u</p>
 
-                     {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0 && (
-  <p className={styles.itemDetails}>
-    Untables: {item.selectedOptions.join(', ')}
-  </p>
-)}
+                      {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0 && (
+                        <p className={styles.itemDetails}>
+                          🧈 Untables: {item.selectedOptions.join(', ')}
+                        </p>
+                      )}
 
-{Array.isArray(item.selectedExtras) && item.selectedExtras.length > 0 && (
-  <p className={styles.itemDetails}>
-    Frutas: {item.selectedExtras.join(', ')}
-  </p>
-)}
+                      {Array.isArray(item.selectedExtras) && item.selectedExtras.length > 0 && (
+                        <p className={styles.itemDetails}>
+                          🍓 Frutas: {item.selectedExtras.join(', ')}
+                        </p>
+                      )}
 
                       {item.observations && (
                         <p className={styles.itemNote}>
-                          Nota: {item.observations}
+                          📝 Nota: {item.observations}
                         </p>
                       )}
                     </div>
@@ -172,14 +188,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 ))}
               </div>
 
-              {/* DATOS */}
+              {/* DATOS DEL CLIENTE */}
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>Tus datos</h3>
+                <h3 className={styles.sectionTitle}>👤 Tus datos</h3>
 
-                <div className={styles.formRow}>
+                <div className={styles.formGroup}>
                   <input
                     type="text"
-                    placeholder="Nombre"
+                    placeholder="Nombre completo"
                     value={customerData.nombre}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       updateCustomerData({ nombre: e.target.value })
@@ -189,19 +205,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
                   <input
                     type="text"
-                    placeholder="Apellido"
-                    value={customerData.apellido}
+                    placeholder="Dirección de entrega"
+                    value={customerData.direccion}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      updateCustomerData({ apellido: e.target.value })
+                      updateCustomerData({ direccion: e.target.value })
                     }
                     className={styles.input}
                   />
                 </div>
               </div>
 
-              {/* PAGO */}
+              {/* MÉTODO DE PAGO */}
               <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>Método de pago</h3>
+                <h3 className={styles.sectionTitle}>💳 Método de pago</h3>
 
                 <div className={styles.paymentOptions}>
                   <label className={styles.radioLabel}>
@@ -216,7 +232,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         })
                       }
                     />
-                    <span>Efectivo</span>
+                    <span>💵 Efectivo</span>
                   </label>
 
                   <label className={styles.radioLabel}>
@@ -227,7 +243,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         updateCustomerData({ metodoPago: 'transferencia' })
                       }
                     />
-                    <span>Transferencia</span>
+                    <span>💳 Transferencia</span>
                   </label>
                 </div>
 
@@ -246,7 +262,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           })
                         }
                       />
-                      <span>¿Necesitas cambio?</span>
+                      <span>💵 ¿Necesitas cambio?</span>
                     </label>
 
                     {customerData.necesitaCambio && (
@@ -274,18 +290,42 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       }
                     >
                       {showPaymentDetails
-                        ? 'Ocultar datos bancarios'
-                        : 'Ver datos bancarios'}
+                        ? '🔒 Ocultar datos bancarios'
+                        : '🔓 Ver datos bancarios'}
                     </button>
 
                     {showPaymentDetails && (
                       <div className={styles.bankDetails}>
-                        <p>Banco: {bankDetails.bank}</p>
-                        <p>Cuenta: {bankDetails.account}</p>
-                        <p>CLABE: {bankDetails.clabe}</p>
-                        <p>Titular: {bankDetails.name}</p>
+                        <div className={styles.bankRow}>
+                          <span>🏦 Banco:</span>
+                          <span className={styles.bankValue}>{bankDetails.bank}</span>
+                        </div>
+                        
+                        <div className={styles.bankRow}>
+                          <span>💳 Número de tarjeta:</span>
+                          <div className={styles.copyContainer}>
+                            <span className={styles.bankValue}>{bankDetails.cardNumber}</span>
+                            <button
+                              className={styles.copyButton}
+                              onClick={() => copyToClipboard(bankDetails.cardNumber)}
+                              title="Copiar número de tarjeta"
+                            >
+                              📋
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <div className={styles.bankRow}>
+                          <span>👤 Titular:</span>
+                          <span className={styles.bankValue}>{bankDetails.name}</span>
+                        </div>
+                        
+                        {copied && (
+                          <p className={styles.copySuccess}>✓ ¡Número copiado!</p>
+                        )}
+                        
                         <p className={styles.note}>
-                          Enviar comprobante por WhatsApp
+                          📸 *IMPORTANTE:* Enviar comprobante de pago por WhatsApp
                         </p>
                       </div>
                     )}
@@ -296,34 +336,34 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
               {/* TOTAL */}
               <div className={styles.summary}>
                 <div className={styles.summaryRow}>
-                  <span>Subtotal:</span>
+                  <span>💰 Subtotal:</span>
                   <span>${subtotal}</span>
                 </div>
 
                 <div className={styles.summaryRow}>
-                  <span>Envío:</span>
+                  <span>🚚 Envío:</span>
                   <span>Gratis</span>
                 </div>
 
                 <div className={styles.totalRow}>
-                  <span>TOTAL:</span>
+                  <span>💵 TOTAL:</span>
                   <span>${subtotal}</span>
                 </div>
               </div>
 
-              {/* BOTONES */}
+              {/* BOTONES DE ACCIÓN */}
               <div className={styles.actions}>
                 <Button variant="outline" onClick={clearCart} fullWidth>
-                  Vaciar carrito
+                  🗑️ Vaciar carrito
                 </Button>
 
                 <Button
                   variant="whatsapp"
                   onClick={handleWhatsAppClick}
                   fullWidth
-                  disabled={!customerData.nombre || !customerData.apellido}
+                  disabled={!customerData.nombre || !customerData.direccion}
                 >
-                  Enviar pedido por WhatsApp
+                  📱 Enviar pedido por WhatsApp
                 </Button>
               </div>
             </>

@@ -18,7 +18,7 @@ const initialState: CartState = {
 
 const initialCustomerData: CustomerData = {
   nombre: '',
-  apellido: '',
+  direccion: '',  // Cambiado de 'apellido' a 'direccion'
   metodoPago: 'efectivo',
   necesitaCambio: false,
   pagoCon: undefined
@@ -80,20 +80,45 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const [customerData, setCustomerData] = React.useState<CustomerData>(initialCustomerData);
 
-  // Persistir en localStorage
+  // Persistir carrito en localStorage
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      const parsed = JSON.parse(savedCart);
-      parsed.items.forEach((item: CartItem) => {
-        dispatch({ type: 'ADD_ITEM', payload: item });
-      });
+      try {
+        const parsed = JSON.parse(savedCart);
+        if (parsed.items && Array.isArray(parsed.items)) {
+          parsed.items.forEach((item: CartItem) => {
+            dispatch({ type: 'ADD_ITEM', payload: item });
+          });
+        }
+      } catch (error) {
+        console.error('Error al cargar el carrito:', error);
+      }
     }
   }, []);
 
+  // Persistir datos del cliente en localStorage
+  useEffect(() => {
+    const savedCustomerData = localStorage.getItem('customerData');
+    if (savedCustomerData) {
+      try {
+        const parsed = JSON.parse(savedCustomerData);
+        setCustomerData(parsed);
+      } catch (error) {
+        console.error('Error al cargar datos del cliente:', error);
+      }
+    }
+  }, []);
+
+  // Guardar carrito cuando cambie
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify({ items: state.items }));
   }, [state.items]);
+
+  // Guardar datos del cliente cuando cambien
+  useEffect(() => {
+    localStorage.setItem('customerData', JSON.stringify(customerData));
+  }, [customerData]);
 
   const addItem = (item: CartItem) => {
     dispatch({ type: 'ADD_ITEM', payload: item });

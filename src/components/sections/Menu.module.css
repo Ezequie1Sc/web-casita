@@ -6,7 +6,7 @@
 .title {
   font-size: 2rem;
   font-weight: 300;
-  color: var(--texto-oscuro);
+  color: #8B5E3C; /* Marrón cálido en lugar de gris */
   margin-bottom: 40px;
   text-align: center;
   letter-spacing: 1px;
@@ -51,10 +51,11 @@
   background: transparent;
   border-radius: 40px;
   font-size: 0.95rem;
-  color: #5a5a5a;
+  color: #8B5E3C; /* Marrón cálido */
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .categoryButton:hover {
@@ -94,9 +95,9 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #f472b6; /* Rosa medio */
+  color: #b45f6b; /* Rosa más intenso para el label */
   margin-bottom: 15px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .filtersGrid {
@@ -113,16 +114,17 @@
   background: white;
   border-radius: 40px;
   font-size: 0.95rem;
-  color: #5a5a5a;
+  color: #8B5E3C; /* Marrón cálido */
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(249, 168, 212, 0.05);
   min-width: 120px;
+  font-weight: 500;
 }
 
 .filterButton:hover {
   border-color: #f9a8d4; /* Rosa suave */
-  color: #f472b6; /* Rosa medio */
+  color: #b45f6b; /* Rosa más intenso */
   transform: translateY(-1px);
   box-shadow: 0 6px 12px rgba(249, 168, 212, 0.15);
   background: #fff5fa; /* Fondo rosa extra suave */
@@ -133,12 +135,12 @@
   border-color: #f9a8d4;
   color: white;
   box-shadow: 0 6px 16px rgba(249, 168, 212, 0.3);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .filterDescription {
   font-size: 0.9rem;
-  color: #f472b6; /* Rosa medio */
+  color: #b45f6b; /* Rosa más intenso */
   margin-top: 15px;
   padding: 8px 20px;
   border-top: 1px dashed #ffd9e8; /* Rosa clarito */
@@ -147,6 +149,7 @@
   background: rgba(255, 255, 255, 0.7);
   border-radius: 40px;
   font-style: normal;
+  font-weight: 500;
 }
 
 /* Grid de productos */
@@ -185,6 +188,12 @@
   transition: all 0.3s ease;
   background: white;
   box-shadow: 0 4px 12px rgba(249, 168, 212, 0.1);
+  color: #4a4a4a; /* Gris más oscuro para el texto escrito */
+}
+
+.searchInput::placeholder {
+  color: #a1887f; /* Marrón claro para el placeholder */
+  opacity: 0.7;
 }
 
 .searchInput:focus {
@@ -201,7 +210,7 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  color: #f9a8d4;
+  color: #b45f6b; /* Rosa más intenso */
   opacity: 0.8;
 }
 
@@ -212,7 +221,7 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #f9a8d4;
+  color: #b45f6b; /* Rosa más intenso */
   cursor: pointer;
   padding: 8px;
   display: flex;
@@ -253,8 +262,9 @@
 
 .emptyStateText {
   font-size: 1.1rem;
-  color: #5a5a5a;
+  color: #8B5E3C; /* Marrón cálido */
   margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .emptyStateButton {
@@ -267,6 +277,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(249, 168, 212, 0.3);
+  font-weight: 600;
 }
 
 .emptyStateButton:hover {
