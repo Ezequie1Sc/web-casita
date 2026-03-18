@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { getMenuData } from '../../data/menu';
 import type { MenuItem } from '../../types/menu';
 import { MenuCard } from '../ui/MenuCard';
-import { Icon } from '../ui/Icon';
 import { AddToCartModal } from '../cart/AddToCartModal';
 import { ToastNotification } from '../ui/ToastNotification';
 import { useCart } from '../../context/CartContext';
 import styles from './Menu.module.css';
 
 export const Menu: React.FC = () => {
-  const menuData = getMenuData(); // ✅ Usar la función en lugar de importar menuData directo
+  const menuData = getMenuData();
   const [selectedCategory, setSelectedCategory] = useState<string>(menuData[0].id);
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('todos');
   const [modalOpen, setModalOpen] = useState(false);
@@ -154,7 +153,6 @@ export const Menu: React.FC = () => {
                 setSelectedSubCategory('todos');
               }}
             >
-              <Icon name={category.icon as any} className={styles.categoryIcon} />
               <span>{category.name}</span>
             </button>
           ))}
@@ -163,8 +161,8 @@ export const Menu: React.FC = () => {
         {hasFilters && (
           <div className={styles.filtersContainer}>
             <div className={styles.filtersLabel}>
-              — {selectedCategory === 'bebidas' ? 'BEBIDAS' : 
-                 selectedCategory === 'hotcakes' ? 'HOT CAKES' : ''} —
+              {selectedCategory === 'bebidas' ? 'BEBIDAS' : 
+               selectedCategory === 'hotcakes' ? 'HOT CAKES' : ''}
             </div>
             
             <div className={styles.filtersGrid}>

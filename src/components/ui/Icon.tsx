@@ -15,8 +15,27 @@ export type IconName =
   | 'shopping-cart'
   | 'x-mark'
   | 'plus'
-  | 'minus'
-  | 'magnifying-glass';  // ← Agregamos el nuevo icono
+  | 'magnifying-glass'
+  | 'user'
+  | 'map-pin'
+  | 'cash'
+  | 'banknotes'
+  | 'credit-card'
+  | 'check'
+  | 'clipboard'
+  | 'clipboard-document'
+  | 'trash'
+  | 'whatsapp'
+  | 'truck'
+  | 'currency-dollar'
+  | 'eye'
+  | 'eye-slash'
+  | 'pencil'
+  | 'cake'
+  | 'gift'
+  | 'phone'
+  | 'envelope'
+  | 'clock';
 
 interface IconProps {
   name: IconName;
@@ -25,6 +44,7 @@ interface IconProps {
 }
 
 const iconMap: Record<IconName, any> = {
+  // Iconos existentes
   'fire': SolidIcons.FireIcon,
   'layers': SolidIcons.Squares2X2Icon,
   'circle-stack': SolidIcons.CircleStackIcon,
@@ -37,10 +57,33 @@ const iconMap: Record<IconName, any> = {
   'shopping-cart': SolidIcons.ShoppingCartIcon,
   'x-mark': SolidIcons.XMarkIcon,
   'plus': SolidIcons.PlusIcon,
-  'magnifying-glass': SolidIcons.MagnifyingGlassIcon,  // ← Agregamos el icono sólido
+  'magnifying-glass': SolidIcons.MagnifyingGlassIcon,
+  
+  // Nuevos iconos para CartDrawer
+  'user': SolidIcons.UserIcon,
+  'map-pin': SolidIcons.MapPinIcon,
+  'cash': SolidIcons.BanknotesIcon,
+  'banknotes': SolidIcons.BanknotesIcon,
+  'credit-card': SolidIcons.CreditCardIcon,
+  'check': SolidIcons.CheckIcon,
+  'clipboard': SolidIcons.ClipboardIcon,
+  'clipboard-document': SolidIcons.ClipboardDocumentIcon,
+  'trash': SolidIcons.TrashIcon,
+  'whatsapp': SolidIcons.PhoneIcon, // Usamos PhoneIcon como placeholder para WhatsApp
+  'truck': SolidIcons.TruckIcon,
+  'currency-dollar': SolidIcons.CurrencyDollarIcon,
+  'eye': SolidIcons.EyeIcon,
+  'eye-slash': SolidIcons.EyeSlashIcon,
+  'pencil': SolidIcons.PencilIcon,
+  'cake': SolidIcons.CakeIcon,
+  'gift': SolidIcons.GiftIcon,
+  'phone': SolidIcons.PhoneIcon,
+  'envelope': SolidIcons.EnvelopeIcon,
+  'clock': SolidIcons.ClockIcon,
 };
 
 const outlineIconMap: Record<IconName, any> = {
+  // Iconos existentes
   'fire': OutlineIcons.FireIcon,
   'layers': OutlineIcons.Squares2X2Icon,
   'circle-stack': OutlineIcons.CircleStackIcon,
@@ -53,7 +96,29 @@ const outlineIconMap: Record<IconName, any> = {
   'shopping-cart': OutlineIcons.ShoppingCartIcon,
   'x-mark': OutlineIcons.XMarkIcon,
   'plus': OutlineIcons.PlusIcon,
-  'magnifying-glass': OutlineIcons.MagnifyingGlassIcon,  // ← Agregamos el icono outline
+  'magnifying-glass': OutlineIcons.MagnifyingGlassIcon,
+  
+  // Nuevos iconos para CartDrawer
+  'user': OutlineIcons.UserIcon,
+  'map-pin': OutlineIcons.MapPinIcon,
+  'cash': OutlineIcons.BanknotesIcon,
+  'banknotes': OutlineIcons.BanknotesIcon,
+  'credit-card': OutlineIcons.CreditCardIcon,
+  'check': OutlineIcons.CheckIcon,
+  'clipboard': OutlineIcons.ClipboardIcon,
+  'clipboard-document': OutlineIcons.ClipboardDocumentIcon,
+  'trash': OutlineIcons.TrashIcon,
+  'whatsapp': OutlineIcons.PhoneIcon,
+  'truck': OutlineIcons.TruckIcon,
+  'currency-dollar': OutlineIcons.CurrencyDollarIcon,
+  'eye': OutlineIcons.EyeIcon,
+  'eye-slash': OutlineIcons.EyeSlashIcon,
+  'pencil': OutlineIcons.PencilIcon,
+  'cake': OutlineIcons.CakeIcon,
+  'gift': OutlineIcons.GiftIcon,
+  'phone': OutlineIcons.PhoneIcon,
+  'envelope': OutlineIcons.EnvelopeIcon,
+  'clock': OutlineIcons.ClockIcon,
 };
 
 export const Icon: React.FC<IconProps> = ({ name, className = 'w-5 h-5', outline = false }) => {

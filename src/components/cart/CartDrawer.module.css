@@ -364,3 +364,158 @@
     justify-content: flex-end;
   }
 }
+/* Estilos adicionales para iconos */
+.titleIcon,
+.sectionIcon,
+.emptyCartIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.itemIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
+.quantityIcon {
+  width: 14px;
+  height: 14px;
+  color: white;
+}
+
+.removeIcon {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--terracota);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 2px solid var(--melocoton);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--terracota);
+  box-shadow: 0 0 0 3px rgba(203, 142, 107, 0.1);
+}
+
+.radioIcon,
+.checkboxIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  color: var(--terracota);
+}
+
+.buttonIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.bankIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  background: var(--melocoton);
+}
+
+.copyIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--terracota);
+}
+
+.copySuccess {
+  color: var(--verde-menta) !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.successIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--verde-menta);
+}
+
+.noteIcon,
+.summaryIcon,
+.totalIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  color: currentColor;
+  vertical-align: middle;
+}
+
+.totalIcon {
+  color: var(--terracota);
+}
+
+/* Ajustes responsive */
+@media (max-width: 480px) {
+  .bankDetails p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .copyButton {
+    margin-left: auto;
+  }
+}
