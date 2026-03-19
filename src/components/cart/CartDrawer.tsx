@@ -10,14 +10,14 @@ interface CartDrawerProps {
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
-  const { 
-    items, 
-    removeItem, 
-    updateQuantity, 
-    subtotal, 
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    subtotal,
     clearCart,
     customerData,
-    updateCustomerData 
+    updateCustomerData
   } = useCart();
 
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
@@ -36,23 +36,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   };
 
   const generateWhatsAppMessage = () => {
-    // Usar emojis SOLO para WhatsApp (ahí se ven bien)
     const itemsList = items.map(item => {
       let itemText = `🍽 *${item.quantity}x ${item.name}*`;
-      
+     
       if (item.selectedOptions?.length) {
-        itemText += `\n   🧈 Untables: ${item.selectedOptions.join(', ')}`;
+        itemText += `\n 🧈 Untables: ${item.selectedOptions.join(', ')}`;
       }
-      
+     
       if (item.selectedExtras?.length) {
-        itemText += `\n   🍓 Frutas extra: ${item.selectedExtras.join(', ')}`;
+        itemText += `\n 🍓 Frutas extra: ${item.selectedExtras.join(', ')}`;
       }
-      
+     
       if (item.observations) {
-        itemText += `\n   📝 Nota: ${item.observations}`;
+        itemText += `\n 📝 Nota: ${item.observations}`;
       }
-      
-      itemText += `\n   💰 Subtotal: $${item.price * item.quantity}`;
+     
+      itemText += `\n 💰 Subtotal: $${item.price * item.quantity}`;
       return itemText;
     }).join('\n\n');
 
@@ -66,30 +65,29 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     message += `💰 *SUBTOTAL: $${subtotal}*\n`;
     message += `🚚 *Envío: Gratis*\n`;
     message += `💵 *TOTAL: $${subtotal}*\n\n`;
-    
+   
     if (customerData.metodoPago === 'efectivo') {
       message += `💵 *Método de pago:* Efectivo\n`;
-
       if (customerData.necesitaCambio && customerData.pagoCon) {
         const cambio = customerData.pagoCon - subtotal;
-        message += `   💵 Paga con: $${customerData.pagoCon}\n`;
-        message += `   💰 Cambio: $${cambio}\n`;
+        message += ` 💵 Paga con: $${customerData.pagoCon}\n`;
+        message += ` 💰 Cambio: $${cambio}\n`;
       }
     } else {
       message += `💳 *Método de pago:* Transferencia\n\n`;
       message += `🏦 *DATOS BANCARIOS:*\n`;
-      message += `   Banco: ${bankDetails.bank}\n`;
-      message += `   💳 Número: ${bankDetails.cardNumber}\n`;
-      message += `   👤 Titular: ${bankDetails.name}\n\n`;
+      message += ` Banco: ${bankDetails.bank}\n`;
+      message += ` 💳 Número: ${bankDetails.cardNumber}\n`;
+      message += ` 👤 Titular: ${bankDetails.name}\n\n`;
       message += `📸 *IMPORTANTE:* Enviar comprobante de pago por este chat\n`;
     }
-    
+   
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `⏰ *Tiempo de preparación:* 25-30 minutos\n`;
+    message += `⏰ *Tiempo de preparación:* 15-20 minutos\n`;
     message += `🙏 ¡Gracias por tu pedido!\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `🏠 *La Casita Desayunos* 🏠`;
-    
+   
     return message;
   };
 
@@ -105,7 +103,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
-      
+     
       <div className={styles.drawer}>
         <div className={styles.header}>
           <h2 className={styles.title}>
@@ -142,21 +140,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         <Icon name="currency-dollar" className={styles.itemIcon} />
                         ${item.price} c/u
                       </p>
-
                       {Array.isArray(item.selectedOptions) && item.selectedOptions.length > 0 && (
                         <p className={styles.itemDetails}>
                           <Icon name="cake" className={styles.itemIcon} />
                           Untables: {item.selectedOptions.join(', ')}
                         </p>
                       )}
-
                       {Array.isArray(item.selectedExtras) && item.selectedExtras.length > 0 && (
                         <p className={styles.itemDetails}>
                           <Icon name="gift" className={styles.itemIcon} />
                           Frutas: {item.selectedExtras.join(', ')}
                         </p>
                       )}
-
                       {item.observations && (
                         <p className={styles.itemNote}>
                           <Icon name="pencil" className={styles.itemIcon} />
@@ -164,7 +159,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         </p>
                       )}
                     </div>
-
                     <div className={styles.itemActions}>
                       <div className={styles.quantityControls}>
                         <button
@@ -173,11 +167,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                         >
                           <Icon name="minus" className={styles.quantityIcon} />
                         </button>
-
                         <span className={styles.quantityValue}>
                           {item.quantity}
                         </span>
-
                         <button
                           className={styles.quantityButton}
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
@@ -185,7 +177,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           <Icon name="plus" className={styles.quantityIcon} />
                         </button>
                       </div>
-
                       <button
                         className={styles.removeButton}
                         onClick={() => removeItem(item.id)}
@@ -203,7 +194,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <Icon name="user" className={styles.sectionIcon} />
                   Tus datos
                 </h3>
-
                 <div className={styles.formGroup}>
                   <div className={styles.inputWrapper}>
                     <Icon name="user" className={styles.inputIcon} />
@@ -217,7 +207,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       className={styles.input}
                     />
                   </div>
-
                   <div className={styles.inputWrapper}>
                     <Icon name="map-pin" className={styles.inputIcon} />
                     <input
@@ -239,7 +228,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <Icon name="credit-card" className={styles.sectionIcon} />
                   Método de pago
                 </h3>
-
                 <div className={styles.paymentOptions}>
                   <label className={styles.radioLabel}>
                     <input
@@ -256,7 +244,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     <Icon name="cash" className={styles.radioIcon} />
                     <span>Efectivo</span>
                   </label>
-
                   <label className={styles.radioLabel}>
                     <input
                       type="radio"
@@ -288,7 +275,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       <Icon name="currency-dollar" className={styles.checkboxIcon} />
                       <span>¿Necesitas cambio?</span>
                     </label>
-
                     {customerData.necesitaCambio && (
                       <div className={styles.inputWrapper}>
                         <Icon name="cash" className={styles.inputIcon} />
@@ -312,16 +298,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <>
                     <button
                       className={styles.showBankButton}
-                      onClick={() =>
-                        setShowPaymentDetails(!showPaymentDetails)
-                      }
+                      onClick={() => setShowPaymentDetails(!showPaymentDetails)}
                     >
                       <Icon name={showPaymentDetails ? 'eye-slash' : 'eye'} className={styles.buttonIcon} />
                       {showPaymentDetails
                         ? 'Ocultar datos bancarios'
                         : 'Ver datos bancarios'}
                     </button>
-
                     {showPaymentDetails && (
                       <div className={styles.bankDetails}>
                         <div className={styles.bankRow}>
@@ -329,7 +312,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           <span>Banco:</span>
                           <span className={styles.bankValue}>{bankDetails.bank}</span>
                         </div>
-                        
                         <div className={styles.bankRow}>
                           <Icon name="credit-card" className={styles.bankIcon} />
                           <span>Número de tarjeta:</span>
@@ -344,20 +326,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                             </button>
                           </div>
                         </div>
-                        
                         <div className={styles.bankRow}>
                           <Icon name="user" className={styles.bankIcon} />
                           <span>Titular:</span>
                           <span className={styles.bankValue}>{bankDetails.name}</span>
                         </div>
-                        
                         {copied && (
                           <p className={styles.copySuccess}>
                             <Icon name="check" className={styles.successIcon} />
                             ¡Número copiado!
                           </p>
                         )}
-                        
                         <p className={styles.note}>
                           <Icon name="phone" className={styles.noteIcon} />
                           IMPORTANTE: Enviar comprobante de pago por WhatsApp
@@ -377,7 +356,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   </span>
                   <span>${subtotal}</span>
                 </div>
-
                 <div className={styles.summaryRow}>
                   <span>
                     <Icon name="truck" className={styles.summaryIcon} />
@@ -385,7 +363,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   </span>
                   <span>Gratis</span>
                 </div>
-
                 <div className={styles.totalRow}>
                   <span>
                     <Icon name="banknotes" className={styles.totalIcon} />
@@ -394,27 +371,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <span>${subtotal}</span>
                 </div>
               </div>
-
-              {/* BOTONES DE ACCIÓN */}
-              <div className={styles.actions}>
-                <Button variant="outline" onClick={clearCart} fullWidth>
-                  <Icon name="trash" className={styles.buttonIcon} />
-                  Vaciar carrito
-                </Button>
-
-                <Button
-                  variant="whatsapp"
-                  onClick={handleWhatsAppClick}
-                  fullWidth
-                  disabled={!customerData.nombre || !customerData.direccion}
-                >
-                  <Icon name="whatsapp" className={styles.buttonIcon} />
-                  Enviar pedido por WhatsApp
-                </Button>
-              </div>
             </>
           )}
         </div>
+
+        {/* ====================== BOTONES FIJOS EN LA PARTE INFERIOR ====================== */}
+        {items.length > 0 && (
+          <div className={styles.actions}>
+            <Button variant="outline" onClick={clearCart} fullWidth>
+              <Icon name="trash" className={styles.buttonIcon} />
+              Vaciar carrito
+            </Button>
+            <Button
+              variant="whatsapp"
+              onClick={handleWhatsAppClick}
+              fullWidth
+              disabled={!customerData.nombre || !customerData.direccion}
+            >
+              <Icon name="whatsapp" className={styles.buttonIcon} />
+              Enviar pedido por WhatsApp
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );
