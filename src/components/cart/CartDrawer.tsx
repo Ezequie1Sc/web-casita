@@ -85,7 +85,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     }
     
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `⏰ *Tiempo de preparación:* 15-20 minutos\n`;
+    message += `⏰ *Tiempo de preparación:* 25-30 minutos\n`;
     message += `🙏 ¡Gracias por tu pedido!\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `🏠 *La Casita Desayunos* 🏠`;
