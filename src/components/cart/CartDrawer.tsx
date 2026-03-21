@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { Button } from '../ui/Button';
 import { Icon } from '../ui/Icon';
@@ -22,6 +22,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [copied, setCopied] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll position when drawer opens
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }, [isOpen]);
 
   const bankDetails = {
     bank: 'AZTECA',
@@ -36,7 +44,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   };
 
   const generateWhatsAppMessage = () => {
-    // Usar emojis SOLO para WhatsApp (ahí se ven bien)
     const itemsList = items.map(item => {
       let itemText = `🍽 *${item.quantity}x ${item.name}*`;
       
@@ -117,7 +124,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <div className={styles.content}>
+        <div className={styles.content} ref={contentRef}>
           {items.length === 0 ? (
             <div className={styles.emptyCart}>
               <Icon name="shopping-cart" className={styles.emptyCartIcon} />
