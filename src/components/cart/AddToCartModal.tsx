@@ -48,37 +48,51 @@ const HAMBURGUESA_OPTIONS = [
 ];
 
 const HOTCAKES_EXTRAS = [
-  'Lechera extra (+$10)',
-  'Miel extra (+$10)',
-  'Mermelada extra (+$10)',
-  "Hershey's extra (+$10)",
-  'Chocolate extra (+$10)'
+  { id: 'lechera-extra', name: 'Lechera extra', price: 10 },
+  { id: 'miel-extra', name: 'Miel extra', price: 10 },
+  { id: 'mermelada-extra', name: 'Mermelada extra', price: 10 },
+  { id: 'hershey-extra', name: "Hershey's extra", price: 10 },
+  { id: 'chocolate-extra', name: 'Chocolate extra', price: 10 }
 ];
 
 const CHILAQUILES_EXTRAS = [
-  'Salsa extra (+$5)',
-  'Crema extra (+$5)',
-  'Queso extra (+$5)'
+  { id: 'salsa-extra', name: 'Salsa extra', price: 5 },
+  { id: 'crema-extra', name: 'Crema extra', price: 5 },
+  { id: 'queso-extra', name: 'Queso extra', price: 5 }
 ];
 
 const SANDWICHES_EXTRAS = [
-  'Salsa extra (+$5)',
-  'Queso extra (+$5)',
-  'Tocino extra (+$10)',
-  'Jamon extra (+$10)',
-  'Huevo extra (+$10)'
+  { id: 'salsa-extra', name: 'Salsa extra', price: 5 },
+  { id: 'queso-extra', name: 'Queso extra', price: 5 },
+  { id: 'tocino-extra', name: 'Tocino extra', price: 10 },
+  { id: 'jamon-extra', name: 'Jamon extra', price: 10 },
+  { id: 'huevo-extra', name: 'Huevo extra', price: 10 }
 ];
 
 const PAPAS_EXTRAS = [
-  'Salsa extra (+$5)',
-  'Queso extra (+$5)',
-  'Salsa de queso (+$10)',
-  'Tocino extra (+$10)'
+  { id: 'salsa-extra', name: 'Salsa extra', price: 5 },
+  { id: 'queso-extra', name: 'Queso extra', price: 5 },
+  { id: 'salsa-queso', name: 'Salsa de queso', price: 10 },
+  { id: 'tocino-extra', name: 'Tocino extra', price: 10 }
 ];
 
 const DEFAULT_EXTRAS = [
-  'Salsa extra (+$5)'
+  { id: 'salsa-extra', name: 'Salsa extra', price: 5 }
 ];
+
+type NotificationType = 'error' | 'warning' | 'info';
+
+interface Notification {
+  id: number;
+  message: string;
+  type: NotificationType;
+}
+
+interface Extra {
+  id: string;
+  name: string;
+  price: number;
+}
 
 export const AddToCartModal: React.FC<AddToCartModalProps> = ({
   isOpen,
@@ -95,6 +109,90 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
   const [selectedBurgerOption, setSelectedBurgerOption] = useState<string>('clasica');
   const [observations, setObservations] = useState('');
   const [currentImage, setCurrentImage] = useState<string>('');
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  const addNotification = (message: string, type: NotificationType = 'warning') => {
+    const id = Date.now();
+    setNotifications(prev => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id));
+    }, 3000);
+  };
+
+  const validateSelections = (): boolean => {
+    if (item?.category === 'Hot Cakes Minis') {
+      if (!selectedFruit) {
+        addNotification('🍎 Por favor selecciona una fruta para los Hot Cakes Minis', 'error');
+        return false;
+      }
+      if (!selectedSpread) {
+        addNotification('🍯 Por favor selecciona un untable para los Hot Cakes Minis', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    if (item?.category === 'Hamburguesas') {
+      if (!selectedBurgerOption) {
+        addNotification('🍔 Por favor selecciona el tipo de hamburguesa', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    if (item?.id === 'hotcakes-fruta') {
+      if (!selectedFruit) {
+        addNotification('🍎 Por favor selecciona una fruta para los Hot Cakes', 'error');
+        return false;
+      }
+      if (!selectedSpread) {
+        addNotification('🍯 Por favor selecciona un untable para los Hot Cakes', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    if (item?.id === 'hotcakes-fresa-chocolate') {
+      if (!selectedSpread) {
+        addNotification('🍫 Por favor selecciona un untable para los Hot Cakes', 'error');
+        return false;
+      }
+      if (selectedSpread !== 'chocolate') {
+        addNotification('🍫 Este producto solo está disponible con untable de chocolate', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    if (item?.category === 'Hot Cakes' && item?.id !== 'hotcakes-sencillo' && item?.id !== 'hotcakes-philadelphia') {
+      if (!selectedSpread) {
+        addNotification('🍯 Por favor selecciona un untable para los Hot Cakes', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    return true;
+  };
+
+  const isConfirmDisabled = (): boolean => {
+    if (item?.category === 'Hot Cakes Minis') {
+      return !selectedFruit || !selectedSpread;
+    }
+    if (item?.id === 'hotcakes-fruta') {
+      return !selectedFruit || !selectedSpread;
+    }
+    if (item?.id === 'hotcakes-fresa-chocolate') {
+      return !selectedSpread || selectedSpread !== 'chocolate';
+    }
+    if (item?.category === 'Hot Cakes' && item?.id !== 'hotcakes-sencillo' && item?.id !== 'hotcakes-philadelphia') {
+      return !selectedSpread;
+    }
+    if (item?.category === 'Hamburguesas') {
+      return !selectedBurgerOption;
+    }
+    return false;
+  };
 
   useEffect(() => {
     if (item) {
@@ -105,6 +203,7 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
       setSelectedProtein(null);
       setObservations('');
       setSelectedBurgerOption('clasica');
+      setNotifications([]);
 
       if (item.category === 'Hot Cakes Minis') {
         setSelectedSize('10');
@@ -148,9 +247,9 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     }
     else if (item.category === 'Hamburguesas') {
       if (selectedBurgerOption === 'clasica') {
-        setCurrentImage('./menu/hamburguesa-a.png'); // Imagen para hamburguesa clásica
+        setCurrentImage('./menu/hamburguesa-a.png');
       } else if (selectedBurgerOption === 'con-papas') {
-        setCurrentImage('./menu/hamPapas.jpg'); // Imagen para hamburguesa con papas
+        setCurrentImage('./menu/hamPapas.jpg');
       } else {
         setCurrentImage(item.image);
       }
@@ -193,7 +292,7 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     item.id === 'hotcakes-fruta' ||
     item.id === 'hotcakes-fresa-chocolate';
 
-  const getExtrasList = () => {
+  const getExtrasList = (): Extra[] => {
     if (isBebida) return [];
     if (isHotCakes || isHotCakesMinis) return HOTCAKES_EXTRAS;
     if (isChilaquiles) return CHILAQUILES_EXTRAS;
@@ -202,15 +301,9 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     return DEFAULT_EXTRAS;
   };
 
-  const getExtraPrice = (extra: string) => {
-    if (extra.includes('$5')) return 5;
-    if (extra.includes('$10')) return 10;
-    return 5;
-  };
-
-  const handleExtraToggle = (extra: string) => {
+  const handleExtraToggle = (extraId: string) => {
     setSelectedExtras(prev =>
-      prev.includes(extra) ? prev.filter(e => e !== extra) : [...prev, extra]
+      prev.includes(extraId) ? prev.filter(id => id !== extraId) : [...prev, extraId]
     );
   };
 
@@ -235,6 +328,10 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
   };
 
   const handleConfirm = () => {
+    if (!validateSelections()) {
+      return;
+    }
+
     onConfirm(
       item,
       quantity,
@@ -246,6 +343,8 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
       selectedSpread || undefined
     );
 
+    addNotification('✅ Producto agregado al carrito', 'info');
+
     setQuantity(1);
     setSelectedSize(isHotCakesMinis ? '10' : 'mediana');
     setSelectedSpread(null);
@@ -254,11 +353,16 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     setSelectedProtein(null);
     setSelectedBurgerOption('clasica');
     setObservations('');
-    onClose();
+    setNotifications([]);
+    
+    setTimeout(() => {
+      onClose();
+    }, 500);
   };
 
   const extrasList = getExtrasList();
-  const extrasCost = selectedExtras.reduce((total, extra) => total + getExtraPrice(extra), 0);
+  const selectedExtrasObjects = extrasList.filter(extra => selectedExtras.includes(extra.id));
+  const extrasCost = selectedExtrasObjects.reduce((total, extra) => total + extra.price, 0);
 
   const getBasePrice = () => {
     if (isChilaquiles) return selectedSize === 'mediana' ? 60 : 80;
@@ -286,10 +390,27 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
     (isHotCakesMinis && selectedSize !== '10') ||
     (isHamburguesas && selectedBurgerOption !== 'clasica');
 
+  const confirmDisabled = isConfirmDisabled();
+
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
       <div className={styles.modal}>
+        <div className={styles.notificationContainer}>
+          {notifications.map(notification => (
+            <div 
+              key={notification.id} 
+              className={`${styles.notification} ${styles[notification.type]}`}
+            >
+              <Icon 
+                name={notification.type === 'error' ? 'exclamation-circle' : 'information-circle'} 
+                className={styles.notificationIcon}
+              />
+              <span>{notification.message}</span>
+            </div>
+          ))}
+        </div>
+
         <div className={styles.header}>
           <h3 className={styles.title}>Personaliza tu pedido</h3>
           <button className={styles.closeButton} onClick={onClose}>
@@ -323,7 +444,10 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
 
           {isHamburguesas && (
             <div className={styles.section}>
-              <label className={styles.label}>Elige tu hamburguesa</label>
+              <label className={styles.label}>
+                Elige tu hamburguesa
+                <span className={styles.requiredStar}>*</span>
+              </label>
               <div className={styles.burgerOptions}>
                 {HAMBURGUESA_OPTIONS.map(option => (
                   <button
@@ -337,6 +461,9 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                   </button>
                 ))}
               </div>
+              {!selectedBurgerOption && isHamburguesas && (
+                <p className={styles.warningText}>⚠️ Es necesario seleccionar un tipo de hamburguesa</p>
+              )}
             </div>
           )}
 
@@ -359,7 +486,10 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
               </div>
 
               <div className={styles.section}>
-                <label className={styles.label}>Selecciona una fruta</label>
+                <label className={styles.label}>
+                  Selecciona una fruta
+                  <span className={styles.requiredStar}>*</span>
+                </label>
                 <div className={styles.fruitOptions}>
                   {MINIS_FRUIT_OPTIONS.map(fruit => (
                     <button
@@ -371,10 +501,16 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                     </button>
                   ))}
                 </div>
+                {!selectedFruit && isHotCakesMinis && (
+                  <p className={styles.warningText}>⚠️ Es necesario seleccionar una fruta</p>
+                )}
               </div>
 
               <div className={styles.section}>
-                <label className={styles.label}>Selecciona un untable</label>
+                <label className={styles.label}>
+                  Selecciona un untable
+                  <span className={styles.requiredStar}>*</span>
+                </label>
                 <div className={styles.spreadOptions}>
                   {SPREAD_OPTIONS.map(spread => (
                     <button
@@ -386,13 +522,19 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                     </button>
                   ))}
                 </div>
+                {!selectedSpread && isHotCakesMinis && (
+                  <p className={styles.warningText}>⚠️ Es necesario seleccionar un untable</p>
+                )}
               </div>
             </>
           )}
 
           {isHotCakes && canHaveSpread && (
             <div className={styles.section}>
-              <label className={styles.label}>Selecciona un untable</label>
+              <label className={styles.label}>
+                Selecciona un untable
+                {item.id !== 'hotcakes-sencillo' && item.id !== 'hotcakes-philadelphia' && <span className={styles.requiredStar}>*</span>}
+              </label>
               <div className={styles.spreadOptions}>
                 {SPREAD_OPTIONS.map(spread => {
                   const isDisabled = item.id === 'hotcakes-fresa-chocolate' && spread.id !== 'chocolate';
@@ -408,12 +550,18 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                   );
                 })}
               </div>
+              {!selectedSpread && item.id !== 'hotcakes-sencillo' && item.id !== 'hotcakes-philadelphia' && (
+                <p className={styles.warningText}>⚠️ Es necesario seleccionar un untable</p>
+              )}
             </div>
           )}
 
           {isHotCakes && canHaveFruit && item.id === 'hotcakes-fruta' && (
             <div className={styles.section}>
-              <label className={styles.label}>Selecciona una fruta</label>
+              <label className={styles.label}>
+                Selecciona una fruta
+                <span className={styles.requiredStar}>*</span>
+              </label>
               <div className={styles.fruitOptions}>
                 {MINIS_FRUIT_OPTIONS.filter(f => f.id === 'manzana' || f.id === 'platano').map(fruit => (
                   <button
@@ -425,6 +573,9 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                   </button>
                 ))}
               </div>
+              {!selectedFruit && (
+                <p className={styles.warningText}>⚠️ Es necesario seleccionar una fruta</p>
+              )}
             </div>
           )}
 
@@ -457,20 +608,27 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
                     className={`${styles.proteinButton} ${selectedProtein === 'huevo' ? styles.active : ''}`}
                     onClick={() => handleProteinToggle('huevo')}
                   >
-                    <span className={styles.proteinEmoji}>🍳</span>
+                    <Icon name="sun" className={styles.proteinIcon} />
                     <span className={styles.proteinName}>Huevo estrellado</span>
                     <span className={styles.proteinPrice}>+$10</span>
                   </button>
                 </div>
                 {selectedProtein === 'huevo' && (
-                  <p className={styles.note}>Huevo agregado</p>
+                  <p className={styles.note}>
+                    <Icon name="check" className={styles.noteIcon} />
+                    Huevo agregado
+                  </p>
                 )}
               </div>
             </>
           )}
 
-          <div className={styles.section}>
-            <label className={styles.label}>Cantidad</label>
+          {/* SECCIÓN DE CANTIDAD MEJORADA */}
+          <div className={styles.quantitySection}>
+            <div className={styles.quantityHeader}>
+              <Icon name="queue-list" className={styles.quantityHeaderIcon} />
+              <span className={styles.quantityLabel}>Cantidad</span>
+            </div>
             <div className={styles.quantityControls}>
               <button
                 className={styles.quantityButton}
@@ -479,7 +637,10 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
               >
                 <Icon name="minus" className={styles.quantityIcon} />
               </button>
-              <span className={styles.quantityValue}>{quantity}</span>
+              <div className={styles.quantityValueContainer}>
+                <span className={styles.quantityValue}>{quantity}</span>
+                <span className={styles.quantityUnit}>pieza(s)</span>
+              </div>
               <button
                 className={styles.quantityButton}
                 onClick={() => setQuantity(prev => prev + 1)}
@@ -489,46 +650,67 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
             </div>
           </div>
 
+          {/* SECCIÓN DE EXTRAS MEJORADA */}
           {!isBebida && extrasList.length > 0 && (
-            <div className={styles.section}>
-              <label className={styles.label}>
-                {isHotCakes || isHotCakesMinis ? 'Extras (+$10 c/u)' : 'Extras'}
-              </label>
+            <div className={styles.extrasSection}>
+              <div className={styles.extrasHeader}>
+                <Icon name="gift" className={styles.extrasHeaderIcon} />
+                <span className={styles.extrasLabel}>
+                  {isHotCakes || isHotCakesMinis ? 'Extras adicionales' : 'Extras'}
+                </span>
+                <span className={styles.extrasBadge}>+${extrasCost * quantity}</span>
+              </div>
+              
               <div className={styles.extrasGrid}>
                 {extrasList.map(extra => {
-                  const isSelected = selectedExtras.includes(extra);
+                  const isSelected = selectedExtras.includes(extra.id);
                   return (
-                    <label key={extra} className={`${styles.extraItem} ${isSelected ? styles.selected : ''}`}>
+                    <label 
+                      key={extra.id} 
+                      className={`${styles.extraCard} ${isSelected ? styles.selected : ''}`}
+                    >
                       <input
                         type="checkbox"
                         checked={isSelected}
-                        onChange={() => handleExtraToggle(extra)}
-                        className={styles.checkbox}
+                        onChange={() => handleExtraToggle(extra.id)}
+                        className={styles.extraCheckbox}
                       />
-                      <span className={styles.extraLabel}>{extra}</span>
+                      <div className={styles.extraContent}>
+                        <span className={styles.extraName}>{extra.name}</span>
+                        <span className={styles.extraPrice}>+${extra.price}</span>
+                      </div>
                     </label>
                   );
                 })}
               </div>
+              
+              {selectedExtras.length > 0 && (
+                <div className={styles.selectedExtrasSummary}>
+                  <Icon name="check" className={styles.summaryIcon} />
+                  <span>{selectedExtras.length} extra(s) seleccionado(s)</span>
+                </div>
+              )}
             </div>
           )}
 
           {isBebida && (
-            <div className={styles.section}>
-              <div className={styles.noExtrasMessage}>
-                <span>Las bebidas no tienen extras disponibles</span>
-              </div>
+            <div className={styles.infoMessage}>
+              <Icon name="information-circle" className={styles.infoIcon} />
+              <span>Las bebidas no tienen extras disponibles</span>
             </div>
           )}
 
           <div className={styles.section}>
-            <label className={styles.label}>Observaciones</label>
+            <label className={styles.label}>
+              <Icon name="pencil" className={styles.labelIcon} />
+              Observaciones
+            </label>
             <textarea
               className={styles.textarea}
               placeholder={isBebida ? "Ej: Sin hielo, temperatura ambiente, etc." : "Ej: Sin cebolla, bien cocido, sin azúcar, etc."}
               value={observations}
               onChange={e => setObservations(e.target.value)}
-              rows={2}
+              rows={3}
             />
           </div>
 
@@ -557,7 +739,14 @@ export const AddToCartModal: React.FC<AddToCartModalProps> = ({
 
           <div className={styles.actions}>
             <Button variant="outline" onClick={onClose} fullWidth>Cancelar</Button>
-            <Button variant="primary" onClick={handleConfirm} fullWidth>Agregar al carrito</Button>
+            <Button 
+              variant="primary" 
+              onClick={handleConfirm} 
+              fullWidth
+              disabled={confirmDisabled}
+            >
+              Agregar al carrito
+            </Button>
           </div>
         </div>
       </div>

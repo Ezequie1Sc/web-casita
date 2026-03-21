@@ -35,7 +35,13 @@ export type IconName =
   | 'gift'
   | 'phone'
   | 'envelope'
-  | 'clock';
+  | 'clock'
+  // Nuevos iconos para el modal
+  | 'exclamation-circle'
+  | 'information-circle'
+  | 'warning'
+  | 'alert'
+  | 'sun';
 
 interface IconProps {
   name: IconName;
@@ -69,7 +75,7 @@ const iconMap: Record<IconName, any> = {
   'clipboard': SolidIcons.ClipboardIcon,
   'clipboard-document': SolidIcons.ClipboardDocumentIcon,
   'trash': SolidIcons.TrashIcon,
-  'whatsapp': SolidIcons.PhoneIcon, // Usamos PhoneIcon como placeholder para WhatsApp
+  'whatsapp': SolidIcons.PhoneIcon,
   'truck': SolidIcons.TruckIcon,
   'currency-dollar': SolidIcons.CurrencyDollarIcon,
   'eye': SolidIcons.EyeIcon,
@@ -80,6 +86,15 @@ const iconMap: Record<IconName, any> = {
   'phone': SolidIcons.PhoneIcon,
   'envelope': SolidIcons.EnvelopeIcon,
   'clock': SolidIcons.ClockIcon,
+  
+  // Nuevos iconos para notificaciones y modal
+  'exclamation-circle': SolidIcons.ExclamationCircleIcon,
+  'information-circle': SolidIcons.InformationCircleIcon,
+  'warning': SolidIcons.ExclamationTriangleIcon,
+  'alert': SolidIcons.ExclamationTriangleIcon,
+  
+  // Icono para proteína (huevo) - usando SunIcon que representa un huevo frito
+  'sun': SolidIcons.SunIcon,
 };
 
 const outlineIconMap: Record<IconName, any> = {
@@ -119,6 +134,15 @@ const outlineIconMap: Record<IconName, any> = {
   'phone': OutlineIcons.PhoneIcon,
   'envelope': OutlineIcons.EnvelopeIcon,
   'clock': OutlineIcons.ClockIcon,
+  
+  // Nuevos iconos para notificaciones y modal
+  'exclamation-circle': OutlineIcons.ExclamationCircleIcon,
+  'information-circle': OutlineIcons.InformationCircleIcon,
+  'warning': OutlineIcons.ExclamationTriangleIcon,
+  'alert': OutlineIcons.ExclamationTriangleIcon,
+  
+  // Icono para proteína (huevo) - usando SunIcon que representa un huevo frito
+  'sun': OutlineIcons.SunIcon,
 };
 
 export const Icon: React.FC<IconProps> = ({ name, className = 'w-5 h-5', outline = false }) => {
