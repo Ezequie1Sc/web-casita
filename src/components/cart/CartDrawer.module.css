@@ -31,6 +31,7 @@
   padding: 20px 24px;
   border-bottom: 1px solid var(--melocoton);
   background: var(--crema);
+  flex-shrink: 0; /* Evita que el header se encoja */
 }
 
 .title {
@@ -38,6 +39,8 @@
   font-weight: 600;
   color: var(--terracota);
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .closeButton {
@@ -53,6 +56,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .closeButton:hover {
@@ -61,9 +65,27 @@
 }
 
 .content {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
   padding: 24px;
+  padding-bottom: 32px; /* Extra padding al final */
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+  scroll-behavior: smooth;
+  min-height: 0; /* Importante para flexbox */
+}
+
+/* Estilo para el scroll en móviles */
+.content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: var(--crema);
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--terracota);
+  border-radius: 4px;
 }
 
 .emptyCart {
@@ -108,12 +130,16 @@
   font-size: 0.9rem;
   color: var(--texto-claro);
   margin: 4px 0;
+  display: flex;
+  align-items: center;
 }
 
 .itemDetails {
   font-size: 0.85rem;
   color: var(--terracota);
   margin: 4px 0;
+  display: flex;
+  align-items: center;
 }
 
 .itemNote {
@@ -123,6 +149,8 @@
   margin: 4px 0;
   padding-left: 8px;
   border-left: 2px solid var(--miel);
+  display: flex;
+  align-items: center;
 }
 
 .itemActions {
@@ -198,27 +226,48 @@
   font-weight: 600;
   color: var(--terracota);
   margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
 }
 
-.formRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.formGroup {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--terracota);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .input {
   width: 100%;
-  padding: 12px;
+  padding: 12px 12px 12px 40px;
   border: 2px solid var(--melocoton);
   border-radius: 8px;
   font-family: inherit;
   font-size: 0.95rem;
   transition: all 0.2s ease;
+  background: white;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--terracota);
+  box-shadow: 0 0 0 3px rgba(203, 142, 107, 0.1);
 }
 
 .paymentOptions {
@@ -273,6 +322,9 @@
   font-size: 0.95rem;
   font-weight: 500;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .showBankButton:hover {
@@ -288,173 +340,25 @@
   border: 1px solid var(--melocoton);
 }
 
-.bankDetails p {
+.bankRow {
+  display: flex;
+  align-items: center;
   margin: 8px 0;
   color: var(--texto-oscuro);
   font-size: 0.95rem;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.note {
-  color: var(--terracota) !important;
-  font-weight: 500;
-  font-size: 0.9rem !important;
-  border-top: 1px dashed var(--melocoton);
-  padding-top: 12px;
-  margin-top: 12px;
+.bankValue {
+  font-weight: 600;
+  color: var(--terracota);
 }
 
-.summary {
-  background: var(--verde-menta);
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.summaryRow {
+.copyContainer {
   display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  color: var(--texto-claro);
-  font-size: 0.95rem;
-}
-
-.totalRow {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--texto-oscuro);
-  border-top: 2px dashed var(--terracota);
-  margin-top: 8px;
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-@media (max-width: 480px) {
-  .drawer {
-    max-width: 100%;
-  }
-  
-  .formRow {
-    grid-template-columns: 1fr;
-  }
-  
-  .cartItem {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .itemActions {
-    justify-content: flex-end;
-  }
-}
-/* Estilos adicionales para iconos */
-.titleIcon,
-.sectionIcon,
-.emptyCartIcon {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  color: var(--terracota);
-  vertical-align: middle;
-}
-
-.closeIcon {
-  width: 20px;
-  height: 20px;
-}
-
-.itemIcon {
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  color: var(--terracota);
-  vertical-align: middle;
-}
-
-.quantityIcon {
-  width: 14px;
-  height: 14px;
-  color: white;
-}
-
-.removeIcon {
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-}
-
-.inputWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.inputIcon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
-  color: var(--terracota);
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.input {
-  width: 100%;
-  padding: 12px 12px 12px 40px;
-  border: 2px solid var(--melocoton);
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-  background: white;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--terracota);
-  box-shadow: 0 0 0 3px rgba(203, 142, 107, 0.1);
-}
-
-.radioIcon,
-.checkboxIcon {
-  width: 18px;
-  height: 18px;
-  margin-right: 4px;
-  color: var(--terracota);
-}
-
-.buttonIcon {
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.bankIcon {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  color: var(--terracota);
-  vertical-align: middle;
+  align-items: center;
+  margin-left: auto;
 }
 
 .copyButton {
@@ -492,6 +396,114 @@
   color: var(--verde-menta);
 }
 
+.note {
+  color: var(--terracota) !important;
+  font-weight: 500;
+  font-size: 0.9rem !important;
+  border-top: 1px dashed var(--melocoton);
+  padding-top: 12px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.summary {
+  background: var(--verde-menta);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: var(--texto-claro);
+  font-size: 0.95rem;
+  align-items: center;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  border-top: 2px dashed var(--terracota);
+  margin-top: 8px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  /* Asegura que los botones sean visibles */
+  position: relative;
+  z-index: 10;
+}
+
+/* Estilos para iconos */
+.titleIcon,
+.sectionIcon,
+.emptyCartIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.itemIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
+.quantityIcon {
+  width: 14px;
+  height: 14px;
+  color: white;
+}
+
+.removeIcon {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+}
+
+.radioIcon,
+.checkboxIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  color: var(--terracota);
+}
+
+.buttonIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.bankIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  color: var(--terracota);
+  vertical-align: middle;
+}
+
 .noteIcon,
 .summaryIcon,
 .totalIcon {
@@ -506,16 +518,84 @@
   color: var(--terracota);
 }
 
-/* Ajustes responsive */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* MEDIA QUERIES - Versión móvil mejorada */
 @media (max-width: 480px) {
-  .bankDetails p {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
+  .drawer {
+    max-width: 100%;
   }
   
+  .content {
+    padding: 16px;
+    padding-bottom: 40px; /* Más espacio al final en móvil */
+  }
+  
+  .cartItem {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .itemActions {
+    justify-content: flex-end;
+  }
+  
+  .bankRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .copyContainer {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .bankRow .bankIcon {
+    align-self: flex-start;
+  }
+  
+  /* Asegurar que los inputs no causen problemas de scroll */
+  .input {
+    font-size: 16px; /* Previene zoom automático en iOS */
+  }
+  
+  /* Mejorar el área táctil de los botones */
+  .quantityButton,
+  .removeButton,
+  .closeButton,
+  .showBankButton,
   .copyButton {
-    margin-left: auto;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Asegurar que los botones principales sean fácilmente clickeables */
+  .actions button {
+    min-height: 48px;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .content {
+    padding: 12px;
+  }
+  
+  .section {
+    padding: 16px;
+  }
+  
+  .paymentOptions {
+    flex-direction: column;
+    gap: 12px;
   }
 }
