@@ -16,6 +16,7 @@
   width: 100%;
   max-width: 480px;
   height: 100vh;
+  height: -webkit-fill-available; /* Para iOS */
   background: var(--blanco);
   box-shadow: var(--shadow-lg);
   z-index: 2001;
@@ -31,7 +32,9 @@
   padding: 20px 24px;
   border-bottom: 1px solid var(--melocoton);
   background: var(--crema);
-  flex-shrink: 0; /* Evita que el header se encoja */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .title {
@@ -65,13 +68,14 @@
 }
 
 .content {
-  flex: 1 1 auto;
+  flex: 1;
   overflow-y: auto;
-  padding: 24px;
-  padding-bottom: 32px; /* Extra padding al final */
-  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+  padding: 20px 24px;
+  padding-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  min-height: 0; /* Importante para flexbox */
+  /* Asegurar que el contenido sea scrolleable */
+  min-height: 0;
 }
 
 /* Estilo para el scroll en móviles */
@@ -274,6 +278,7 @@
   display: flex;
   gap: 24px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .radioLabel {
@@ -435,13 +440,18 @@
   align-items: center;
 }
 
+/* BOTONES DE ACCIÓN - Mejorado para móvil */
 .actions {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
-  /* Asegura que los botones sean visibles */
-  position: relative;
+  margin-bottom: 8px;
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding-top: 12px;
+  border-top: 1px solid var(--melocoton);
   z-index: 10;
 }
 
@@ -532,11 +542,16 @@
 @media (max-width: 480px) {
   .drawer {
     max-width: 100%;
+    height: 100vh;
+    height: -webkit-fill-available;
   }
   
   .content {
-    padding: 16px;
-    padding-bottom: 40px; /* Más espacio al final en móvil */
+    padding: 16px 20px;
+    padding-bottom: 16px;
+    /* Asegurar que el scroll funcione correctamente */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .cartItem {
@@ -565,7 +580,7 @@
   
   /* Asegurar que los inputs no causen problemas de scroll */
   .input {
-    font-size: 16px; /* Previene zoom automático en iOS */
+    font-size: 16px;
   }
   
   /* Mejorar el área táctil de los botones */
@@ -578,16 +593,34 @@
     min-width: 44px;
   }
   
+  /* Botones de acción fijos en la parte inferior */
+  .actions {
+    margin-top: 16px;
+    margin-bottom: 0;
+    padding: 12px 0 8px 0;
+    background: white;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+  }
+  
   /* Asegurar que los botones principales sean fácilmente clickeables */
   .actions button {
-    min-height: 48px;
+    min-height: 52px;
+    font-size: 1rem !important;
+  }
+  
+  /* Espacio extra al final para mejor scroll */
+  .itemsList:last-child,
+  .section:last-of-type {
+    margin-bottom: 0;
   }
 }
 
 /* Para pantallas muy pequeñas */
 @media (max-width: 360px) {
   .content {
-    padding: 12px;
+    padding: 12px 16px;
   }
   
   .section {
@@ -597,5 +630,38 @@
   .paymentOptions {
     flex-direction: column;
     gap: 12px;
+  }
+  
+  .actions button {
+    min-height: 48px;
+  }
+}
+
+/* Ajustes para cuando el teclado está abierto */
+@media (max-height: 600px) {
+  .drawer {
+    height: 100%;
+  }
+  
+  .content {
+    max-height: calc(100vh - 70px);
+  }
+  
+  .actions {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    margin-top: 8px;
+  }
+}
+
+/* Mejoras para iOS */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .drawer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .actions {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 }

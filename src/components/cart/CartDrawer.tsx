@@ -23,6 +23,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const lastScrollTop = useRef(0);
 
   // Reset scroll position when drawer opens
   useEffect(() => {
@@ -30,6 +31,33 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
       contentRef.current.scrollTop = 0;
     }
   }, [isOpen]);
+
+  // Manejar el scroll para asegurar que el botón sea visible
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current) {
+        lastScrollTop.current = contentRef.current.scrollTop;
+      }
+    };
+
+    const content = contentRef.current;
+    if (content) {
+      content.addEventListener('scroll', handleScroll);
+      return () => content.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  // Función para hacer scroll al botón de WhatsApp cuando sea necesario
+  const scrollToBottom = () => {
+    if (contentRef.current) {
+      setTimeout(() => {
+        contentRef.current?.scrollTo({
+          top: contentRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100);
+    }
+  };
 
   const bankDetails = {
     bank: 'AZTECA',
@@ -106,6 +134,31 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
   };
+
+  // Efecto para hacer scroll cuando se abre el teclado
+  useEffect(() => {
+    const handleFocus = () => {
+      setTimeout(scrollToBottom, 300);
+    };
+
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('focus', handleFocus);
+      input.addEventListener('blur', () => {
+        setTimeout(() => {
+          if (contentRef.current && lastScrollTop.current > 0) {
+            contentRef.current.scrollTop = lastScrollTop.current;
+          }
+        }, 100);
+      });
+    });
+
+    return () => {
+      inputs.forEach(input => {
+        input.removeEventListener('focus', handleFocus);
+      });
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
