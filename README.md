@@ -1,75 +1,175 @@
-# React + TypeScript + Vite
+# 🏡 Web Casita - Desayunos Sorpresa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![preview](./assets/preview.png)
 
-Currently, two official plugins are available:
+> Plataforma web para la venta de desayunos sorpresa con enfoque en experiencia de usuario, personalización y contacto directo vía WhatsApp.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Demo
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+🔗 **Ver sitio en producción:**
+👉 https://web-casita.vercel.app/
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 📌 Descripción
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Web Casita** es una aplicación web moderna diseñada para un negocio de desayunos sorpresa, donde el usuario puede:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* Explorar productos visualmente
+* Inspirarse con galerías dinámicas
+* Solicitar pedidos personalizados
+* Contactar directamente vía WhatsApp
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+El objetivo principal es ofrecer una experiencia emocional + funcional que convierta visitantes en clientes.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ✨ Características principales
+
+* 🎠 Carrusel interactivo con autoplay
+* 📱 Diseño totalmente responsive
+* 💬 Integración directa con WhatsApp
+* 🖼️ Galería de productos (desayunos sorpresa)
+* 🎯 UX enfocada en conversión
+* ⚡ Optimización para rendimiento (deploy en Vercel)
+
+---
+
+## 🧠 Enfoque UX
+
+El diseño está pensado para:
+
+* Generar impacto visual inmediato (hero + imágenes)
+* Reducir fricción (sin registro)
+* Acción rápida → contacto directo
+* Experiencia emocional (regalos, sorpresas)
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+* ⚛️ React
+* 🟦 TypeScript
+* 🎨 CSS Modules
+* ☁️ Vercel (deploy y hosting)
+
+Vercel permite despliegues automáticos, optimización de rendimiento y distribución global de contenido ([Nexgen Systems][1])
+
+---
+
+## 📂 Estructura del proyecto
+
+```bash
+src/
+│
+├── components/
+│   ├── ui/            # Componentes reutilizables (Button, Icon, WhatsApp)
+│   ├── sections/      # Secciones principales (Hero, SurpriseGifts, etc.)
+│
+├── styles/            # Estilos globales
+├── assets/            # Imágenes
+│
+└── App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📸 Screenshots
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🏠 Página principal
+
+![home](./assets/home.png)
+
+### 🎁 Sección de sorpresas
+
+![sorpresas](./assets/surprise.png)
+
+### 📱 Responsive
+
+![mobile](./assets/mobile.png)
+
+---
+
+## 🔧 Instalación y uso
+
+```bash
+# Clonar repositorio
+git clone https://github.com/tu-usuario/web-casita.git
+
+# Entrar al proyecto
+cd web-casita
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en desarrollo
+npm run dev
 ```
+
+---
+
+## 🌐 Deploy
+
+Este proyecto está desplegado en:
+
+👉 Vercel
+
+Cada push genera un nuevo deploy automáticamente.
+
+---
+
+## 📲 Integración con WhatsApp
+
+El sistema utiliza enlaces tipo:
+
+```bash
+https://wa.me/<numero>?text=<mensaje>
+```
+
+Permitiendo:
+
+* Contacto inmediato
+* Sin autenticación
+* Flujo tipo e-commerce ligero
+
+---
+
+## 🎯 Futuras mejoras
+
+* 🛒 Carrito de compras
+* 📍 Integración con ubicación (Google Maps)
+* 🧾 Generación automática de pedidos
+* 🔔 Notificaciones
+* 📊 Analytics de usuarios
+
+---
+
+## 👨‍💻 Autor
+
+**Ezequiel Salazar**
+
+* 💻 Desarrollador de software
+* 🚀 Enfocado en crear soluciones útiles y escalables
+
+---
+
+## 📄 Licencia
+
+MIT License
+
+---
+
+## ⭐ Contribuciones
+
+Las contribuciones son bienvenidas.
+Puedes hacer fork del proyecto y enviar un pull request.
+
+---
+
+## 💡 Nota final
+
+Este proyecto no solo busca vender desayunos, sino **crear experiencias memorables a través de la tecnología**.
+
+[1]: https://nexgen.mx/tecnologias/cloud/vercel?utm_source=chatgpt.com "Vercel - Cloud e Infraestructura | Stack Tecnológico | Nexgen Systems | Nexgen Systems"
