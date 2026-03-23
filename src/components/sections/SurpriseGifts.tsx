@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { WhatsAppButton } from '../ui/WhatsAppButton';
 import { Icon } from '../ui/Icon';
 import styles from './SurpriseGifts.module.css';
 
-// Datos de ejemplo para la galería de desayunos sorpresa
+// Datos...
 const surpriseGallery = [
   {
     id: 1,
@@ -103,6 +104,7 @@ export const SurpriseGifts: React.FC = () => {
           </p>
         </div>
 
+        {/* Carrusel */}
         <div 
           className={styles.carouselContainer}
           onMouseEnter={handleMouseEnter}
@@ -142,14 +144,13 @@ export const SurpriseGifts: React.FC = () => {
           <button 
             className={`${styles.navButton} ${styles.prevButton}`}
             onClick={prevSlide}
-            aria-label="Anterior"
           >
             <Icon name="chevron-left" className={styles.navIcon} outline={false} />
           </button>
+
           <button 
             className={`${styles.navButton} ${styles.nextButton}`}
             onClick={nextSlide}
-            aria-label="Siguiente"
           >
             <Icon name="chevron-right" className={styles.navIcon} outline={false} />
           </button>
@@ -160,28 +161,36 @@ export const SurpriseGifts: React.FC = () => {
                 key={index}
                 className={`${styles.indicator} ${currentIndex === index ? styles.active : ''}`}
                 onClick={() => goToSlide(index)}
-                aria-label={`Ir a imagen ${index + 1}`}
               />
             ))}
           </div>
         </div>
 
-        {/* resto intacto */}
+        {/* CONTACTO */}
         <div className={styles.customOrderSection}>
-          {/* ... sin cambios */}
+          <div className={styles.customContent}>
+            <h3 className={styles.customTitle}>
+              ¿Te gustaría sorprender a una persona especial?
+            </h3>
+
+            <div className={styles.contactActions}>
+              
+              {/* 🔥 BOTÓN REUTILIZABLE */}
+             <WhatsAppButton
+  phoneNumber="529961136244"
+  message="Hola, me gustaría encargar un desayuno sorpresa personalizado"
+/>
+
+            </div>
+          </div>
         </div>
       </div>
 
       {selectedItem && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={closeModal}>×</button>
-            <img 
-              src={selectedItem.image} 
-              alt={selectedItem.alt}
-              className={styles.modalImage}
-            />
-            <p className={styles.modalCaption}>{selectedItem.alt}</p>
+            <button onClick={closeModal}>×</button>
+            <img src={selectedItem.image} alt={selectedItem.alt} />
           </div>
         </div>
       )}

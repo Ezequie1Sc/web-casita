@@ -13,7 +13,7 @@ interface WhatsAppButtonProps {
 
 export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   message,
-  phoneNumber = '521234567890',
+  phoneNumber = '529961136244',
   variant = 'whatsapp',
   size = 'md',
   fullWidth = false,
