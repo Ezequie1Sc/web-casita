@@ -1,3 +1,5 @@
+/* SurpriseGifts.module.css */
+
 .surpriseSection {
   padding: 80px 0;
   background: linear-gradient(135deg, #f9f5f7 0%, #f2e8ec 100%);
@@ -70,481 +72,7 @@
 }
 
 /* ========================= */
-/* GALERÍA DE IMÁGENES - CORREGIDA */
-/* ========================= */
-.galleryGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  max-width: 1200px;
-  margin: 0 auto 70px;
-  padding: 0 20px;
-}
-
-.galleryItem {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  cursor: pointer;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  background: #f5f5f5;
-}
-
-.galleryItem:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(180, 95, 107, 0.3);
-}
-
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.galleryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.galleryImage[style*="aspect-ratio"] {
-  object-fit: contain;
-  background: #f5f5f5;
-}
-
-.galleryItem:hover .galleryImage {
-  transform: scale(1.05);
-}
-
-.imageOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.galleryItem:hover .imageOverlay {
-  opacity: 1;
-}
-
-.categoryTag {
-  background: rgba(255, 255, 255, 0.95);
-  color: #b45f6b;
-  padding: 10px 20px;
-  border-radius: 40px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  align-self: flex-start;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  letter-spacing: 0.5px;
-}
-
-.viewIcon {
-  align-self: flex-end;
-  background: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  font-weight: bold;
-}
-
-/* ========================= */
-/* SECCIÓN DE CONTACTO PERSONALIZADO */
-/* ========================= */
-.customOrderSection {
-  background: white;
-  border-radius: 50px;
-  padding: 70px 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-shadow: 0 25px 50px rgba(180, 95, 107, 0.15);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(249, 168, 180, 0.3);
-}
-
-.customContent {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.customTitle {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #b45f6b;
-  margin-bottom: 25px;
-  line-height: 1.4;
-}
-
-.customDescription {
-  font-size: 1.3rem;
-  color: #4a4a4a;
-  max-width: 800px;
-  margin: 0 auto 50px;
-  line-height: 1.7;
-}
-
-/* ========================= */
-/* FEATURES CON ICONOS PROFESIONALES */
-/* ========================= */
-.featuresList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
-  margin: 50px 0;
-}
-
-.featureItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  min-width: 160px;
-}
-
-.featureIcon {
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(135deg, #b45f6b 0%, #d47e8a 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  box-shadow: 0 15px 30px rgba(180, 95, 107, 0.3);
-  transition: all 0.3s ease;
-}
-
-.featureItem:hover .featureIcon {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(180, 95, 107, 0.4);
-}
-
-.featureIcon svg {
-  width: 45px;
-  height: 45px;
-  stroke: white;
-  stroke-width: 1.5;
-  fill: none;
-}
-
-.featureItem span:last-child {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #4a4a4a;
-  letter-spacing: 0.5px;
-}
-
-.contactActions {
-  margin-top: 60px;
-}
-
-.contactButton {
-  background: #b45f6b !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 80px !important;
-  padding: 20px 50px !important;
-  font-size: 1.5rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 10px 0 #7a4b53, 0 15px 30px rgba(180, 95, 107, 0.3) !important;
-  transition: all 0.3s ease !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.contactButton:hover {
-  background: #9e4f5a !important;
-  transform: translateY(-5px) !important;
-  box-shadow: 0 15px 0 #7a4b53, 0 20px 40px rgba(180, 95, 107, 0.4) !important;
-}
-
-.contactNote {
-  font-size: 1rem;
-  color: #7a4b53;
-  margin-top: 25px;
-  font-style: italic;
-  opacity: 0.9;
-}
-
-/* ========================= */
-/* MODAL PARA VER IMAGEN */
-/* ========================= */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 3000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-
-.modalContent {
-  position: relative;
-  max-width: 95vw;
-  max-height: 95vh;
-  background: white;
-  border-radius: 30px;
-  padding: 25px;
-  animation: scaleIn 0.3s ease;
-}
-
-.modalClose {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 50px;
-  height: 50px;
-  background: #b45f6b;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  transition: all 0.3s ease;
-  z-index: 10;
-  font-weight: bold;
-}
-
-.modalClose:hover {
-  background: #9e4f5a;
-  transform: scale(1.15) rotate(90deg);
-}
-
-.modalImage {
-  max-width: 100%;
-  max-height: 75vh;
-  object-fit: contain;
-  border-radius: 15px;
-}
-
-.modalCaption {
-  text-align: center;
-  margin-top: 20px;
-  color: #b45f6b;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-/* ========================= */
-/* ANIMACIONES */
-/* ========================= */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-@media (max-width: 768px) {
-  .surpriseSection {
-    padding: 60px 0;
-  }
-
-  .title {
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    padding: 0 20px;
-  }
-
-  .galleryGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .customOrderSection {
-    padding: 50px 30px;
-    border-radius: 40px;
-    margin: 0 20px;
-  }
-
-  .customTitle {
-    font-size: 2rem;
-  }
-
-  .customDescription {
-    font-size: 1.2rem;
-  }
-
-  .featuresList {
-    gap: 30px;
-  }
-
-  .featureIcon {
-    width: 80px;
-    height: 80px;
-  }
-
-  .featureIcon svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .featureItem span:last-child {
-    font-size: 1.1rem;
-  }
-
-  .contactButton {
-    padding: 18px 40px !important;
-    font-size: 1.3rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1.1rem;
-  }
-
-  .galleryGrid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    gap: 20px;
-  }
-
-  .categoryTag {
-    padding: 8px 16px;
-    font-size: 1rem;
-  }
-
-  .viewIcon {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
-  }
-
-  .customOrderSection {
-    padding: 40px 20px;
-  }
-
-  .customTitle {
-    font-size: 1.8rem;
-  }
-
-  .customDescription {
-    font-size: 1.1rem;
-    margin-bottom: 35px;
-  }
-
-  .featuresList {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-
-  .featureItem {
-    width: 100%;
-    max-width: 220px;
-  }
-
-  .contactButton {
-    padding: 16px 30px !important;
-    font-size: 1.2rem !important;
-    width: 100%;
-  }
-
-  .contactNote {
-    font-size: 0.95rem;
-  }
-
-  .modalClose {
-    top: -15px;
-    right: -15px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.8rem;
-  }
-
-  .modalCaption {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .galleryGrid {
-    max-width: 1300px;
-    gap: 30px;
-  }
-
-  .customOrderSection {
-    max-width: 1300px;
-    padding: 80px 70px;
-  }
-
-  .customTitle {
-    font-size: 2.8rem;
-  }
-
-  .featureIcon {
-    width: 100px;
-    height: 100px;
-  }
-
-  .featureIcon svg {
-    width: 50px;
-    height: 50px;
-  }
-
-  .featureItem span:last-child {
-    font-size: 1.3rem;
-  }
-}
-/* ========================= */
-/* CARRUSEL CON MOVIMIENTO AUTOMÁTICO Y NAVEGACIÓN MANUAL */
+/* CARRUSEL PRINCIPAL - CORREGIDO PARA RESPONSIVE */
 /* ========================= */
 .carouselContainer {
   position: relative;
@@ -560,13 +88,37 @@
 .carouselTrack {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .carouselSlide {
   flex: 0 0 100%;
-  aspect-ratio: 16 / 9;
   position: relative;
   cursor: pointer;
+  aspect-ratio: 16 / 9;
+}
+
+/* Ajustes responsive para el carrusel */
+@media (max-width: 768px) {
+  .carouselContainer {
+    margin-bottom: 50px;
+    border-radius: 20px;
+  }
+  
+  .carouselSlide {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselContainer {
+    margin-bottom: 40px;
+    border-radius: 16px;
+  }
+  
+  .carouselSlide {
+    aspect-ratio: 3 / 4;
+  }
 }
 
 .imageWrapper {
@@ -582,10 +134,26 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+  .carouselImage {
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 .carouselSlide:hover .carouselImage {
   transform: scale(1.05);
+}
+
+/* Eliminar hover en móviles para mejor rendimiento */
+@media (max-width: 768px) {
+  .carouselSlide:hover .carouselImage {
+    transform: none;
+  }
 }
 
 .imageOverlay {
@@ -603,6 +171,15 @@
   transition: opacity 0.3s ease;
 }
 
+/* En móviles, mantener el overlay visible */
+@media (max-width: 768px) {
+  .imageOverlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    padding: 16px;
+  }
+}
+
 .carouselSlide:hover .imageOverlay {
   opacity: 1;
 }
@@ -616,6 +193,22 @@
   font-weight: 700;
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .categoryTag {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 480px) {
+  .categoryTag {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
 }
 
 .viewButton {
@@ -630,6 +223,22 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .viewButton {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+@media (max-width: 480px) {
+  .viewButton {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .viewButton:hover {
@@ -646,6 +255,20 @@
   height: 24px;
   color: #b45f6b;
   transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .viewIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .viewIcon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* Botones de navegación */
@@ -668,6 +291,21 @@
   z-index: 10;
 }
 
+@media (max-width: 768px) {
+  .navButton {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+@media (max-width: 480px) {
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 .navButton:hover {
   background: #b45f6b;
   transform: translateY(-50%) scale(1.1);
@@ -681,8 +319,32 @@
   left: 20px;
 }
 
+@media (max-width: 768px) {
+  .prevButton {
+    left: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .prevButton {
+    left: 8px;
+  }
+}
+
 .nextButton {
   right: 20px;
+}
+
+@media (max-width: 768px) {
+  .nextButton {
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nextButton {
+    right: 8px;
+  }
 }
 
 .navIcon {
@@ -690,6 +352,20 @@
   height: 24px;
   color: #b45f6b;
   transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .navIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* Indicadores */
@@ -701,6 +377,21 @@
   display: flex;
   gap: 12px;
   z-index: 10;
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .indicators {
+    bottom: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .indicators {
+    bottom: 12px;
+    gap: 12px;
+  }
 }
 
 .indicator {
@@ -714,6 +405,22 @@
   padding: 0;
 }
 
+@media (max-width: 768px) {
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .indicator {
+    width: 10px;
+    height: 10px;
+    padding: 4px;
+    margin: -4px;
+  }
+}
+
 .indicator:hover {
   background: rgba(255, 255, 255, 0.8);
   transform: scale(1.2);
@@ -725,138 +432,198 @@
   border-radius: 5px;
 }
 
-/* ========================= */
-/* RESPONSIVE CARRUSEL */
-/* ========================= */
 @media (max-width: 768px) {
-  .carouselContainer {
-    margin-bottom: 50px;
-    border-radius: 20px;
-  }
-
-  .navButton {
-    width: 40px;
-    height: 40px;
-  }
-
-  .navIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .prevButton {
-    left: 12px;
-  }
-
-  .nextButton {
-    right: 12px;
-  }
-
-  .categoryTag {
-    padding: 6px 14px;
-    font-size: 0.8rem;
-  }
-
-  .viewButton {
-    width: 40px;
-    height: 40px;
-  }
-
-  .viewIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .indicators {
-    bottom: 15px;
-    gap: 10px;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-  }
-
   .indicator.active {
     width: 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .carouselContainer {
-    margin-bottom: 40px;
-    border-radius: 16px;
-  }
-
-  .navButton {
-    width: 36px;
-    height: 36px;
-  }
-
-  .navIcon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .prevButton {
-    left: 8px;
-  }
-
-  .nextButton {
-    right: 8px;
-  }
-
-  .categoryTag {
-    padding: 5px 12px;
-    font-size: 0.75rem;
-  }
-
-  .viewButton {
-    width: 36px;
-    height: 36px;
-  }
-
-  .viewIcon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .indicators {
-    bottom: 12px;
-    gap: 8px;
-  }
-
-  .indicator {
-    width: 6px;
-    height: 6px;
-  }
-
   .indicator.active {
-    width: 20px;
+    width: 28px;
   }
 }
 
-/* Animación de entrada */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.carouselContainer {
-  animation: fadeIn 0.5s ease;
-}/* ========================= */
-/* BOTÓN DE WHATSAPP VERDE */
 /* ========================= */
+/* SECCIÓN DE CONTACTO PERSONALIZADO */
+/* ========================= */
+.customOrderSection {
+  background: white;
+  border-radius: 50px;
+  padding: 70px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 25px 50px rgba(180, 95, 107, 0.15);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(249, 168, 180, 0.3);
+}
+
+@media (max-width: 768px) {
+  .customOrderSection {
+    padding: 50px 30px;
+    border-radius: 40px;
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customOrderSection {
+    padding: 40px 20px;
+    border-radius: 30px;
+    margin: 0 16px;
+  }
+}
+
+.customContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.customTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #b45f6b;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .customTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customTitle {
+    font-size: 1.8rem;
+  }
+}
+
+.customDescription {
+  font-size: 1.3rem;
+  color: #4a4a4a;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .customDescription {
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customDescription {
+    font-size: 1.1rem;
+  }
+}
+
+/* Features con iconos */
+.featuresList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin: 50px 0;
+}
+
+@media (max-width: 768px) {
+  .featuresList {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featuresList {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}
+
+.featureItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  min-width: 160px;
+}
+
+@media (max-width: 480px) {
+  .featureItem {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+.featureIcon {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #b45f6b 0%, #d47e8a 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 15px 30px rgba(180, 95, 107, 0.3);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .featureIcon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.featureItem:hover .featureIcon {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(180, 95, 107, 0.4);
+}
+
+.featureIcon svg {
+  width: 45px;
+  height: 45px;
+  stroke: white;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@media (max-width: 768px) {
+  .featureIcon svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.featureItem span:last-child {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4a4a4a;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .featureItem span:last-child {
+    font-size: 1.1rem;
+  }
+}
+
 .contactActions {
   margin-top: 60px;
 }
 
+@media (max-width: 480px) {
+  .contactActions {
+    margin-top: 40px;
+  }
+}
+
+/* Botón de WhatsApp */
 .whatsappButton {
   display: inline-flex;
   align-items: center;
@@ -876,6 +643,21 @@
   letter-spacing: 0.5px;
 }
 
+@media (max-width: 768px) {
+  .whatsappButton {
+    padding: 14px 32px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsappButton {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    width: 100%;
+  }
+}
+
 .whatsappButton:hover {
   background: #20b859;
   transform: translateY(-3px);
@@ -892,6 +674,20 @@
   fill: white;
 }
 
+@media (max-width: 768px) {
+  .whatsappIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsappIcon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 .contactNote {
   font-size: 1rem;
   color: #7a4b53;
@@ -900,37 +696,249 @@
   opacity: 0.9;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .whatsappButton {
-    padding: 14px 32px;
-    font-size: 1.2rem;
-  }
-
-  .whatsappIcon {
-    width: 24px;
-    height: 24px;
-  }
-
   .contactNote {
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .whatsappButton {
-    padding: 12px 28px;
-    font-size: 1.1rem;
-    width: 100%;
-  }
-
-  .whatsappIcon {
-    width: 22px;
-    height: 22px;
-  }
-
   .contactNote {
     font-size: 0.85rem;
     padding: 0 16px;
+  }
+}
+
+/* ========================= */
+/* MODAL PARA VER IMAGEN - RESPONSIVE */
+/* ========================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(8px);
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalOverlay {
+    padding: 12px;
+  }
+}
+
+.modalContent {
+  position: relative;
+  width: 90%;
+  max-width: 95vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  animation: scaleIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    width: 95%;
+    padding: 15px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 98%;
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
+.modalContent button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 45px;
+  height: 45px;
+  background: #b45f6b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-weight: bold;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .modalContent button {
+    top: -12px;
+    right: -12px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent button {
+    top: -10px;
+    right: -10px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+}
+
+.modalContent button:hover {
+  background: #9e4f5a;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.modalContent img {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .modalContent img {
+    max-height: 75vh;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent img {
+    max-height: 70vh;
+    border-radius: 8px;
+  }
+}
+
+/* ========================= */
+/* CONTAINER RESPONSIVE */
+/* ========================= */
+.surpriseSection .container {
+  padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+  .surpriseSection .container {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .surpriseSection .container {
+    padding: 0 8px;
+  }
+}
+
+/* ========================= */
+/* ANIMACIONES */
+/* ========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.carouselContainer {
+  animation: fadeIn 0.5s ease;
+}
+
+/* ========================= */
+/* RESPONSIVE GLOBAL */
+/* ========================= */
+@media (max-width: 768px) {
+  .surpriseSection {
+    padding: 60px 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .surpriseSection {
+    padding: 50px 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .customOrderSection {
+    max-width: 1300px;
+    padding: 80px 70px;
+  }
+
+  .customTitle {
+    font-size: 2.8rem;
+  }
+
+  .featureIcon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .featureIcon svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .featureItem span:last-child {
+    font-size: 1.3rem;
   }
 }
