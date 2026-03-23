@@ -1,51 +1,65 @@
 import React from 'react';
 import { Button } from '../ui/Button';
-import styles from './Hero.module.css';  // ← CAMBIAR a "./Hero.module.css"
+import styles from './Hero.module.css';
 
 interface HeroProps {
   onNavigate: (section: string) => void;
+  onCartClick: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
-  return (
-    <section id="hero" className={styles.hero}>
-      <div className={styles.background}>
-        <div className={styles.circle1}></div>
-        <div className={styles.circle2}></div>
-        <div className={styles.circle3}></div>
-      </div>
+export const Hero: React.FC<HeroProps> = ({ onNavigate, onCartClick }) => {
+  const collageImages = [
+    { src: '/menu/chilaquiles.jpg', alt: 'Chilaquiles verdes recién preparados', className: styles.image1 },
+    { src: '/menu/hotcake-manza.jpg', alt: 'Hotcakes esponjosos con manzana', className: styles.image2 },
+    { src: '/menu/club-con-papas.jpg', alt: 'Club sandwich con papas crujientes', className: styles.image3 },
+    { src: '/menu/hamburguesa.jpg', alt: 'Hamburguesa jugosa con acompañamientos', className: styles.image4 },
+  ];
 
-      <div className={`container ${styles.container}`}>
+  return (
+    <section className={styles.hero}>
+      <div className={styles.container}>
         <div className={styles.content}>
+          {/* Eliminado el badge "Sabor casero" */}
+          
           <h1 className={styles.title}>
-            Bienvenidos a
-            <br />
-            <span className={styles.highlight}>La Casita</span>
+            Desayunos que saben
+            <span> a casa</span>
           </h1>
-          <p className={styles.subtitle}>
-            Desayunos y Mas · Hechos con amor
-          </p>
+
           <p className={styles.description}>
-            Disfruta de los mejores desayunos,
-            Todo preparado al momento con ingredientes frescos y de calidad.
+            Chilaquiles, hotcakes esponjosos, sandwiches y postres preparados con amor. 
+            Entrega rápida y calientita — ordena fácil por WhatsApp.
           </p>
-          <div className={styles.buttons}>
+
+          <div className={styles.actions}>
             <Button size="lg" onClick={() => onNavigate('menu')}>
-              Ver Menú
+              Ver menú
             </Button>
-            <Button variant="outline" size="lg" onClick={() => onNavigate('promotions')}>
-              Ver Promocion
+
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={onCartClick}
+            >
+              Pedir ahora
             </Button>
           </div>
         </div>
 
-        <div className={styles.imageContainer}>
-          <div className={styles.imageWrapper}>
-            <img 
-              src="./logo2.png" 
-              alt="La Casita"
-              className={styles.image}
-            />
+        <div className={styles.visual}>
+          <div className={styles.collage}>
+            {collageImages.map((image, index) => (
+              <div
+                key={index}
+                className={`${styles.collageItem} ${image.className}`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

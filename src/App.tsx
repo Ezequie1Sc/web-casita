@@ -35,7 +35,10 @@ function App() {
       />
 
       <main>
-        <Hero onNavigate={handleNavigate} />
+        <Hero 
+          onNavigate={handleNavigate}
+          onCartClick={() => setIsCartOpen(true)}  // ← Aquí la prop faltante
+        />
         <Menu />
         <Promotions onWhatsAppClick={handleWhatsApp} />
         <SurpriseGifts />

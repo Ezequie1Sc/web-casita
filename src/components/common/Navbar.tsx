@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
+import { Icon } from '../ui/Icon';
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
@@ -10,12 +11,28 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onCartClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
   const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      const sections = ['hero', 'menu', 'sorpresas', 'promociones'];
+      const scrollPosition = window.scrollY + 100;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -30,116 +47,105 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onCartClick }) => {
   const handleNavigate = (section: string) => {
     onNavigate(section);
     setIsMobileMenuOpen(false);
+    setActiveSection(section);
   };
 
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className={`container ${styles.container}`}>
-        <div 
-          className={styles.logo}
-          onClick={() => handleNavigate('hero')}
-        >
-          <img 
-            src="./logo2.png" 
-            alt="La Casita"
-            className={styles.logoImage}
-          />
-          <span className={styles.logoText}>La Casita</span>
-        </div>
-
-        {/* Menú de navegación - visible en desktop */}
-        <ul className={styles.menu}>
-          {menuItems.map((item) => (
-            <li key={item.section}>
-              <a
-                href={`#${item.section}`}
-                className={styles.menuLink}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigate(item.section);
-                }}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Sección derecha: carrito + menú móvil */}
-        <div className={styles.rightSection}>
-          {/* Carrito de compras */}
-          <button 
-            className={styles.cartButton}
-            onClick={onCartClick}
-            aria-label="Carrito de compras"
+    <>
+      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+        <div className={styles.container}>
+          {/* Logo más grande */}
+          <div 
+            className={styles.logo}
+            onClick={() => handleNavigate('hero')}
           >
-            <svg 
-              className={styles.cartIcon} 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                d="M8 22C8.55228 22 9 21.5523 9 21C9 20.4477 8.55228 20 8 20C7.44772 20 7 20.4477 7 21C7 21.5523 7.44772 22 8 22Z" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
+            <div className={styles.logoWrapper}>
+              <img 
+                src="./logo2.png" 
+                alt="La Casita"
+                className={styles.logoImage}
               />
-              <path 
-                d="M19 22C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20C18.4477 20 18 20.4477 18 21C18 21.5523 18.4477 22 19 22Z" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-              <path 
-                d="M2.05 2.05H4.05L6.71 14.47C6.82 14.99 7.1 15.45 7.5 15.77C7.9 16.09 8.39 16.26 8.89 16.25H18.89C19.39 16.26 19.88 16.09 20.28 15.77C20.68 15.45 20.96 14.99 21.07 14.47L22.95 5.95H5.55" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
-            {totalItems > 0 && (
-              <span className={styles.cartBadge}>{totalItems}</span>
-            )}
-          </button>
+              <div className={styles.logoGlow}></div>
+            </div>
+            <span className={styles.logoText}>La Casita</span>
+          </div>
 
-          {/* Botón menú móvil */}
-          <button 
-            className={`${styles.menuButton} ${isMobileMenuOpen ? styles.open : ''}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Menú"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-
-        {/* Menú móvil desplegable */}
-        <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.active : ''}`}>
-          <ul className={styles.mobileMenuList}>
+          {/* Desktop Navigation */}
+          <ul className={styles.menu}>
             {menuItems.map((item) => (
               <li key={item.section}>
-                <a
-                  href={`#${item.section}`}
-                  className={styles.mobileMenuLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigate(item.section);
-                  }}
+                <button
+                  className={`${styles.menuLink} ${activeSection === item.section ? styles.active : ''}`}
+                  onClick={() => handleNavigate(item.section)}
                 >
                   {item.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
+
+          {/* Right Section */}
+          <div className={styles.rightSection}>
+            <button 
+              className={styles.cartButton}
+              onClick={onCartClick}
+              aria-label="Carrito"
+            >
+              <Icon name="shopping-cart" className={styles.cartIcon} outline={false} />
+              {totalItems > 0 && (
+                <span className={styles.cartBadge}>{totalItems}</span>
+              )}
+            </button>
+
+            <button 
+              className={`${styles.menuButton} ${isMobileMenuOpen ? styles.open : ''}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Menú"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay and Panel */}
+      <div className={`${styles.mobileOverlay} ${isMobileMenuOpen ? styles.active : ''}`} onClick={() => setIsMobileMenuOpen(false)} />
+      <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.active : ''}`}>
+        <div className={styles.mobileMenuHeader}>
+          <div className={styles.mobileLogo}>
+            <img src="./logo2.png" alt="La Casita" />
+            <span>La Casita</span>
+          </div>
+          <button 
+            className={styles.closeButton}
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Cerrar"
+          >
+            <Icon name="x-mark" className={styles.closeIcon} outline={false} />
+          </button>
+        </div>
+        <ul className={styles.mobileMenuList}>
+          {menuItems.map((item) => (
+            <li key={item.section}>
+              <button
+                className={`${styles.mobileMenuLink} ${activeSection === item.section ? styles.active : ''}`}
+                onClick={() => handleNavigate(item.section)}
+              >
+                {item.label}
+                <Icon name="chevron-right" className={styles.mobileArrow} outline={true} />
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.mobileMenuFooter}>
+          <div className={styles.footerInfo}>
+            <p>Horario: 8:00 AM - 12:00 PM</p>
+            <p>Martes a Domingo</p>
+          </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };

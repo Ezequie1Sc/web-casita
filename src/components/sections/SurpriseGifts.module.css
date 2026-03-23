@@ -543,3 +543,394 @@
     font-size: 1.3rem;
   }
 }
+/* ========================= */
+/* CARRUSEL CON MOVIMIENTO AUTOMÁTICO Y NAVEGACIÓN MANUAL */
+/* ========================= */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 70px;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: #f5f5f5;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carouselSlide {
+  flex: 0 0 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.carouselSlide:hover .carouselImage {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carouselSlide:hover .imageOverlay {
+  opacity: 1;
+}
+
+.categoryTag {
+  background: rgba(255, 255, 255, 0.95);
+  color: #b45f6b;
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.viewButton {
+  background: rgba(255, 255, 255, 0.95);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.viewButton:hover {
+  transform: scale(1.1);
+  background: #b45f6b;
+}
+
+.viewButton:hover .viewIcon {
+  color: white;
+}
+
+.viewIcon {
+  width: 24px;
+  height: 24px;
+  color: #b45f6b;
+  transition: color 0.3s ease;
+}
+
+/* Botones de navegación */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.navButton:hover {
+  background: #b45f6b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.navButton:hover .navIcon {
+  color: white;
+}
+
+.prevButton {
+  left: 20px;
+}
+
+.nextButton {
+  right: 20px;
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+  color: #b45f6b;
+  transition: color 0.3s ease;
+}
+
+/* Indicadores */
+.indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.indicator.active {
+  background: #b45f6b;
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* ========================= */
+/* RESPONSIVE CARRUSEL */
+/* ========================= */
+@media (max-width: 768px) {
+  .carouselContainer {
+    margin-bottom: 50px;
+    border-radius: 20px;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .prevButton {
+    left: 12px;
+  }
+
+  .nextButton {
+    right: 12px;
+  }
+
+  .categoryTag {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .viewButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .viewIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .indicators {
+    bottom: 15px;
+    gap: 10px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicator.active {
+    width: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselContainer {
+    margin-bottom: 40px;
+    border-radius: 16px;
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .prevButton {
+    left: 8px;
+  }
+
+  .nextButton {
+    right: 8px;
+  }
+
+  .categoryTag {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+
+  .viewButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .viewIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .indicators {
+    bottom: 12px;
+    gap: 8px;
+  }
+
+  .indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicator.active {
+    width: 20px;
+  }
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carouselContainer {
+  animation: fadeIn 0.5s ease;
+}/* ========================= */
+/* BOTÓN DE WHATSAPP VERDE */
+/* ========================= */
+.contactActions {
+  margin-top: 60px;
+}
+
+.whatsappButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 18px 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.whatsappButton:hover {
+  background: #20b859;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
+}
+
+.whatsappButton:active {
+  transform: translateY(1px);
+}
+
+.whatsappIcon {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
+
+.contactNote {
+  font-size: 1rem;
+  color: #7a4b53;
+  margin-top: 25px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .whatsappButton {
+    padding: 14px 32px;
+    font-size: 1.2rem;
+  }
+
+  .whatsappIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .contactNote {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsappButton {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    width: 100%;
+  }
+
+  .whatsappIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .contactNote {
+    font-size: 0.85rem;
+    padding: 0 16px;
+  }
+}

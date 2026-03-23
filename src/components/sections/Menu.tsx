@@ -5,6 +5,7 @@ import { MenuCard } from '../ui/MenuCard';
 import { AddToCartModal } from '../cart/AddToCartModal';
 import { ToastNotification } from '../ui/ToastNotification';
 import { useCart } from '../../context/CartContext';
+import { Icon } from '../ui/Icon';
 import styles from './Menu.module.css';
 
 export const Menu: React.FC = () => {
@@ -25,28 +26,29 @@ export const Menu: React.FC = () => {
 
   const selectedCategoryData = menuData.find(cat => cat.id === selectedCategory);
 
-  // Configuración para filtros de bebidas
-  const drinkFilterConfig = [
-    { id: 'todos', label: 'Todos', description: 'Todas nuestras bebidas disponibles' },
-    { id: 'Embotellados', label: 'Embotellados', description: 'Bebidas embotelladas de las mejores marcas' },
-    { id: 'Licuados', label: 'Licuados', description: 'Licuados cremosos preparados con fruta natural' }
-  ];
-
-  // Configuración para filtros de hot cakes
-  const hotcakesFilterConfig = [
-    { id: 'todos', label: 'Todos', description: 'Todos nuestros hot cakes' },
-    { id: 'Hot Cakes Normales', label: 'Hot Cakes (3 piezas)', description: 'Hot cakes tradicionales de 3 piezas' },
-    { id: 'Hot Cakes Minis', label: 'Hot Cakes Minis', description: 'Hot cakes pequeños en porciones de 10 a 30 piezas' }
-  ];
-
-  // Obtener los filtros según la categoría seleccionada
-  const getFilterConfig = () => {
-    if (selectedCategory === 'bebidas') return drinkFilterConfig;
-    if (selectedCategory === 'hotcakes') return hotcakesFilterConfig;
+  // Configuración de filtros con descripciones
+  const getFilterOptions = () => {
+    if (selectedCategory === 'bebidas') {
+      return [
+        { id: 'todos', label: 'Todos', desc: 'Todas las bebidas' },
+        { id: 'Embotellados', label: 'Embotellados', desc: 'Bebidas en botella' },
+        { id: 'Licuados', label: 'Licuados', desc: 'Frescos y naturales' }
+      ];
+    }
+    if (selectedCategory === 'hotcakes') {
+      return [
+        { id: 'todos', label: 'Todos', desc: 'Todos los hot cakes' },
+        { id: 'Hot Cakes Normales', label: 'Hot Cakes', desc: '3 piezas esponjosas' },
+        { id: 'Hot Cakes Minis', label: 'Hot Cakes Minis', desc: 'Mini porciones' }
+      ];
+    }
     return [];
   };
 
-  // Filtrar items por subcategoría
+  const filterOptions = getFilterOptions();
+  const hasFilters = filterOptions.length > 0;
+
+  // Filtrar items
   const getFilteredItems = () => {
     if (!selectedCategoryData) return [];
     
@@ -56,6 +58,8 @@ export const Menu: React.FC = () => {
     
     return selectedCategoryData.items.filter(item => item.category === selectedSubCategory);
   };
+
+  const filteredItems = getFilteredItems();
 
   const handleAddToCart = (item: MenuItem) => {
     setSelectedItem(item);
@@ -117,17 +121,8 @@ export const Menu: React.FC = () => {
     setModalOpen(false);
   };
 
-  const filterConfig = getFilterConfig();
-  const filteredItems = getFilteredItems();
-  const hasFilters = filterConfig.length > 0;
-
-  const getActiveDescription = () => {
-    const activeFilter = filterConfig.find(f => f.id === selectedSubCategory);
-    return activeFilter?.description || '';
-  };
-
   const handleViewCart = () => {
-    const cartButton = document.querySelector('[aria-label="Carrito de compras"]');
+    const cartButton = document.querySelector('[aria-label="Carrito"]');
     if (cartButton) {
       (cartButton as HTMLButtonElement).click();
     }
@@ -140,51 +135,65 @@ export const Menu: React.FC = () => {
 
   return (
     <section id="menu" className={styles.menu}>
-      <div className="container">
-        <h2 className={styles.title}>Menú</h2>
-        
-        <div className={styles.categories}>
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className={`${styles.categoryButton} ${selectedCategory === category.id ? styles.active : ''}`}
-              onClick={() => {
-                setSelectedCategory(category.id);
-                setSelectedSubCategory('todos');
-              }}
-            >
-              <span>{category.name}</span>
-            </button>
-          ))}
+      <div className={styles.container}>
+        {/* HEADER */}
+        <div className={styles.header}>
+          <h2 className={styles.title}>Menú</h2>
+          <p className={styles.subtitle}>
+            Descubre nuestros platillos preparados con amor y los mejores ingredientes
+          </p>
         </div>
 
-        {hasFilters && (
-          <div className={styles.filtersContainer}>
-            <div className={styles.filtersLabel}>
-              {selectedCategory === 'bebidas' ? 'BEBIDAS' : 
-               selectedCategory === 'hotcakes' ? 'HOT CAKES' : ''}
-            </div>
-            
-            <div className={styles.filtersGrid}>
-              {filterConfig.map((filter) => (
-                <button
-                  key={filter.id}
-                  className={`${styles.filterButton} ${selectedSubCategory === filter.id ? styles.active : ''}`}
-                  onClick={() => setSelectedSubCategory(filter.id)}
-                >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
+        {/* Categorías principales */}
+        <div className={styles.categoriesWrapper}>
+          <div className={styles.categories}>
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                className={`${styles.categoryButton} ${selectedCategory === category.id ? styles.active : ''}`}
+                onClick={() => {
+                  setSelectedCategory(category.id);
+                  setSelectedSubCategory('todos');
+                }}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
-            {selectedSubCategory !== 'todos' && (
-              <div className={styles.filterDescription}>
-                {getActiveDescription()}
+        {/* Filtros - Nuevo diseño profesional */}
+        {hasFilters && (
+          <div className={styles.filtersWrapper}>
+            <div className={styles.filtersSection}>
+              <div className={styles.filtersHeader}>
+                <div className={styles.filtersTitle}>
+                  <Icon name="layers" className={styles.filtersIcon} outline={false} />
+                  <h3>Filtrar por tipo</h3>
+                </div>
+                <div className={styles.filtersCount}>
+                  {filterOptions.length - 1} opciones
+                </div>
               </div>
-            )}
+              <div className={styles.filtersGrid}>
+                {filterOptions.map((filter) => (
+                  <button
+                    key={filter.id}
+                    className={`${styles.filterCard} ${selectedSubCategory === filter.id ? styles.active : ''}`}
+                    onClick={() => setSelectedSubCategory(filter.id)}
+                  >
+                    <div className={styles.filterCardTitle}>{filter.label}</div>
+                    {filter.id !== 'todos' && (
+                      <div className={styles.filterCardDesc}>{filter.desc}</div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
+        {/* Grid de productos */}
         <div className={styles.grid}>
           {filteredItems.map((item) => (
             <MenuCard
@@ -194,6 +203,14 @@ export const Menu: React.FC = () => {
             />
           ))}
         </div>
+
+        {/* Estado vacío */}
+        {filteredItems.length === 0 && (
+          <div className={styles.emptyState}>
+            <Icon name="circle-stack" className={styles.emptyIcon} outline={true} />
+            <p>No hay productos en esta categoría</p>
+          </div>
+        )}
       </div>
 
       <AddToCartModal
