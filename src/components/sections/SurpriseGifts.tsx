@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { WhatsAppButton } from '../ui/WhatsAppButton';
 import { Icon } from '../ui/Icon';
 import styles from './SurpriseGifts.module.css';
 
