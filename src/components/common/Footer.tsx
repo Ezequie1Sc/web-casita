@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
           <h4>Ordena o contáctanos</h4>
 
           <a
-            href="https://wa.me/529961136244"
+            href="https://wa.me/529961332194"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cta}
