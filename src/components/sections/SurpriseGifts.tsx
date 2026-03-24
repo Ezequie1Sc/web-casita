@@ -177,7 +177,7 @@ export const SurpriseGifts: React.FC = () => {
               
               {/* 🔥 BOTÓN REUTILIZABLE */}
              <WhatsAppButton
-  phoneNumber="529961136244"
+  phoneNumber="529961332194"
   message="Hola, me gustaría encargar un desayuno sorpresa personalizado"
 />
 
